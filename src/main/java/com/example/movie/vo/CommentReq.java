@@ -2,6 +2,10 @@ package com.example.movie.vo;
 
 public class CommentReq {
 	
+	private int commentIndex;
+	
+	private int commentIndexOrder;
+	
 	private String movie;
 	
 	private String commentText;
@@ -40,6 +44,22 @@ public class CommentReq {
 
 	public void setDislike(int dislike) {
 		this.dislike = dislike;
+	}
+
+	public int getCommentIndex() {
+		return commentIndex;
+	}
+
+	public void setCommentIndex(int commentIndex) {
+		this.commentIndex = commentIndex;
+	}
+
+	public int getCommentIndexOrder() {
+		return commentIndexOrder;
+	}
+
+	public void setCommentIndexOrder(int commentIndexOrder) {
+		this.commentIndexOrder = commentIndexOrder;
 	}
 	
 	

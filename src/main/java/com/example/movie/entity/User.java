@@ -1,4 +1,4 @@
-package com.example.moive.entity;
+package com.example.movie.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,15 +11,10 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 	
-	//GeneratedValue可以讓資料存進去後立刻得到DB中AI產生的流水號值
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "order")
-	private int order;
-	
 	@Column(name = "name")
 	private String name;
 	
+	@Id
 	@Column(name = "account")
 	private String account;
 	
@@ -37,22 +32,13 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int order, String name, String account, String pwd, String email, int phone) {
+	public User(String name, String account, String pwd, String email, int phone) {
 		super();
-		this.order = order;
 		this.name = name;
 		this.account = account;
 		this.pwd = pwd;
 		this.email = email;
 		this.phone = phone;
-	}
-
-	public int getOrder() {
-		return order;
-	}
-
-	public void setOrder(int order) {
-		this.order = order;
 	}
 
 	public String getName() {
@@ -94,7 +80,7 @@ public class User {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
-	
-	
+
+
 
 }

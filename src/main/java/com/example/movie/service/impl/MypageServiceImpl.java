@@ -1,18 +1,18 @@
 package com.example.movie.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.example.moive.entity.Mypage;
 import com.example.movie.constant.RtnCode;
+import com.example.movie.entity.Mypage;
 import com.example.movie.repository.MypageDAO;
 import com.example.movie.service.ifs.MypageService;
+import com.example.movie.vo.MypageGetRes;
 import com.example.movie.vo.UserLoginRes;
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import java.util.Optional;
 
 @Service
 public class MypageServiceImpl implements MypageService {
@@ -23,10 +23,10 @@ public class MypageServiceImpl implements MypageService {
     @Override
     public UserLoginRes create(String account,String favorit,String watchList, String accountMovieList) {
         if (!StringUtils.hasText(account)) {
-            return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
 
-        mypageDao.save(new Mypage(account, favorit,watchList,accountMovieList));
+        mypageDao.save(new Mypage(account, favorit, watchList, accountMovieList));
 
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
@@ -35,7 +35,7 @@ public class MypageServiceImpl implements MypageService {
 	public UserLoginRes update(String account,String favorit,String watchList, String accountMovieList) {
 		Optional<Mypage> op = mypageDao.findById(account);
 		if (op.isEmpty()){
-			return new UserLoginRes(RtnCode.PAGE_NOT_FOUND.getCode(),RtnCode.PAGE_NOT_FOUND.getMessage());
+			return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
 		}
 		Mypage mypage = op.get();
 		if(StringUtils.hasText(favorit)){
@@ -48,11 +48,18 @@ public class MypageServiceImpl implements MypageService {
 			mypage.setAccountMovieList(accountMovieList);
 		}
 		try {
-			mypageDao.save(new Mypage(account,favorit,watchList,accountMovieList));
-		} catch (JsonProcessingException e) {
+			mypageDao.save(new Mypage(account,mypage.getFavorit(),mypage.getWatchList(),mypage.getAccountMovieList()));
+		} catch (Exception e) {
 			return new UserLoginRes(RtnCode.PAGE_CREATE_ERROR.getCode(), RtnCode.PAGE_CREATE_ERROR.getMessage());
 		}
 		return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+	}
+
+	@Override
+	public UserLoginRes search(String account) {
+		Optional<Mypage> op = mypageDao.findById(account);
+		return new MypageGetRes(RtnCode.SUCCESSFUL.getCode(),
+				RtnCode.SUCCESSFUL.getMessage(),op);
 	}
 
 

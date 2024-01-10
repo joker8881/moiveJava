@@ -1,19 +1,23 @@
 package com.example.movie.repository;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.moive.entity.Artwork;
-import com.example.moive.entity.Comment;
-import com.example.quiz.entity.Quiz;
+import com.example.movie.entity.Artwork;
 
 @Repository
 public interface ArtworkDAO extends JpaRepository<Artwork, String>{
 	
-    public List<Artwork> findByName
-    (String searchName, String searchArtName);
+    public List<Artwork> findByMovieContainingAndArtNameContaining(String movie, String artname);
+    
+    public Optional<Artwork> findByArtOrder(int artorder);
+    
+	@Transactional
+	public int deleteByArtOrder(int artorder);
 
 }

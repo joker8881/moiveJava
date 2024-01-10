@@ -1,14 +1,14 @@
-package com.example.moive;
+package com.example.movie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class MoiveApplication {
+public class MovieApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MoiveApplication.class, args);
+		SpringApplication.run(MovieApplication.class, args);
 	}
 
 }

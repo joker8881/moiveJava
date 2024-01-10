@@ -5,8 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.example.moive.entity.User;
 import com.example.movie.constant.RtnCode;
+import com.example.movie.entity.Comment;
+import com.example.movie.entity.User;
 import com.example.movie.repository.UserDAO;
 import com.example.movie.service.ifs.UserService;
 import com.example.movie.vo.UserLoginRes;
@@ -44,7 +45,6 @@ public class UserServiceImpl implements UserService {
         if (userDao.existsById(account)) {
             return new UserLoginRes(RtnCode.ACCOUNT_EXISTED.getCode(),RtnCode.ACCOUNT_EXISTED.getMessage());
         }
-
         String encodedPwd = encoder.encode(pwd);
 
         User newUser = new User();
@@ -55,8 +55,6 @@ public class UserServiceImpl implements UserService {
         newUser.setName(name);
 
         userDao.save(newUser);
-
-//        userDao.save(new User(account, encoder.encode(pwd),email,phone,name));
 
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }

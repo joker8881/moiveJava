@@ -1,8 +1,8 @@
 package com.example.movie.vo;
 
-import com.example.moive.entity.Artwork;
-
 import java.util.List;
+
+import com.example.movie.entity.Artwork;
 
 public class ArtworkGetRes extends UserLoginRes {
 

@@ -1,4 +1,4 @@
-package com.example.moive.entity;
+package com.example.movie.entity;
 import java.io.Serializable;
 
 import java.time.LocalDate;

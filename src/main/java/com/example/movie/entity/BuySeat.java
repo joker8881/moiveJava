@@ -1,4 +1,4 @@
-package com.example.moive.entity;
+package com.example.movie.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

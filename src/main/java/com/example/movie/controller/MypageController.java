@@ -25,8 +25,14 @@ public class MypageController {
 	}
 	
 	@PostMapping(value = "movie/mypage/update")
-	public UserLoginRes update(@RequestParam(value = "index") int index, @RequestBody MypageReq req) {
+	public UserLoginRes update(@RequestBody MypageReq req) {
 				return mypageService.update(req.getAccount(),req.getFavorit(),req.getWatchList(),req.getAccountMovieList());
 	}
+	
+	//因為有用 @RequestParam ，api的 uri會是movie/mypage/search?account=帳號
+	@PostMapping(value = "movie/mypage/search")
+	public UserLoginRes search(@RequestParam(value = "account") String account) {
+		return mypageService.search(account);
+}
 
 }

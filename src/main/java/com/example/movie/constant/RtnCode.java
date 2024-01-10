@@ -12,6 +12,7 @@ public enum RtnCode {
 	COMMENT_IS_NOT_EXSISTED(400,"Comment is not exsisted!"),
 	COMMENT_TEXT_IS_NONE(400,"Comment text is none!"),
 	ART_IS_NOT_FOUND(400,"Art is not found!"),
+	ART_DLETE_ORDER_NOT_FOUND(400,"Art dlete order not found!"),
 	ACCOUNT_EXISTED(400,"Account existed!");
 	
 	private int code;

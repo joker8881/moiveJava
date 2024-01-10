@@ -18,7 +18,7 @@ public class UserServiceController {
 	private UserService userService;
 	
 	//
-	@PostMapping(value = "movie/user/login")
+	@PostMapping(value = "/movie/user/login")
 	public UserLoginRes login(@RequestBody UserLoginReq req) {
 		return userService.login(req.getAccount(),req.getPwd());
 	}
