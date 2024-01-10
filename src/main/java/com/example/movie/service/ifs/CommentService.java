@@ -4,11 +4,11 @@ import com.example.movie.vo.UserLoginRes;
 
 public interface CommentService {
 	
-	public UserLoginRes create(String movie,String commentText);
+	public UserLoginRes create(String movie,String commentText,String account);
 	
-	public UserLoginRes createchild(int commentIndex,String movie,String commentText);
+	public UserLoginRes createchild(int commentIndex,String movie,String commentText,String account);
 
-	public UserLoginRes update(int commentIndex,int commentIndexOrder,String movie,String commentText);
+	public UserLoginRes update(int commentIndex,int commentIndexOrder,String movie,String commentText,String account);
 	
 	public UserLoginRes delete(int commentIndex,int commentIndexOrder,String movie);
 	

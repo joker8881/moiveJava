@@ -11,6 +11,9 @@ public class UserLoginReq {
 	@JsonProperty("password")
 	private String pwd;
 	
+	@JsonProperty("newPassword")
+	private String newPwd;
+	
 	private String email;
 	
 	private int phone;

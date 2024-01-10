@@ -20,25 +20,28 @@ public class CommentServiceImpl implements CommentService {
     private CommentDAO commentDao;
 
     @Override
-    public UserLoginRes create(String movie,String commentText) {
+    public UserLoginRes create(String movie,String commentText,String account) {
         if (!StringUtils.hasText(commentText)) {
             return new UserLoginRes(RtnCode.COMMENT_TEXT_IS_NONE.getCode(),RtnCode.COMMENT_TEXT_IS_NONE.getMessage());
+        }
+        if (!StringUtils.hasText(account)) {
+            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
         Optional<Comment> op = commentDao.findAllByMovie(movie);
         Comment comment = null;
         if(op.isEmpty()) {
-        	comment = commentDao.save(new Comment(movie, 1, commentText));
+        	comment = commentDao.save(new Comment(movie, 1, commentText,account));
         } else {
         	comment = op.get();
             int x = comment.getCommentIndex() + 1 ;
             
-            commentDao.save(new Comment(movie, x, commentText));
+            commentDao.save(new Comment(movie, x, commentText,account));
         }
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
     
 	@Override
-	public UserLoginRes createchild(int commentIndex, String movie, String commentText) {
+	public UserLoginRes createchild(int commentIndex, String movie, String commentText,String account) {
         if (!StringUtils.hasText(commentText)) {
             return new UserLoginRes(RtnCode.COMMENT_TEXT_IS_NONE.getCode(),RtnCode.COMMENT_TEXT_IS_NONE.getMessage());
         }
@@ -48,9 +51,9 @@ public class CommentServiceImpl implements CommentService {
         if(op.isPresent()) {
         	comment = op.get();
         	int newCommentIndexOrder = comment.getCommentIndexOrder() + 1;
-        	commentDao.save(new Comment(movie, commentIndex, newCommentIndexOrder, commentText));
+        	commentDao.save(new Comment(movie, commentIndex, newCommentIndexOrder, commentText,account));
         } else {
-        	commentDao.save(new Comment(movie, commentIndex, 1 , commentText));
+        	commentDao.save(new Comment(movie, commentIndex, 1 , commentText,account));
         }
 
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
@@ -58,8 +61,8 @@ public class CommentServiceImpl implements CommentService {
 
 
 	@Override
-	public UserLoginRes update(int commentIndex,int commentIndexOrder, String movie, String commentText) {
-		if(commentIndex ==0 || (commentIndex==0 && commentIndexOrder==0) || movie=="" || movie==null || commentText=="" || commentText==null) {
+	public UserLoginRes update(int commentIndex,int commentIndexOrder, String movie, String commentText,String account) {
+		if(commentIndex ==0 || (commentIndex==0 && commentIndexOrder==0) || StringUtils.hasText(movie) || StringUtils.hasText(commentText) || StringUtils.hasText(account)) {
 			return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
 		}
 		Optional<Comment> op = commentDao.findByCommentIndexAndCommentIndexOrderAndMovie(commentIndex,commentIndexOrder,movie);
@@ -73,6 +76,7 @@ public class CommentServiceImpl implements CommentService {
 		if(StringUtils.hasText(commentText)){
 			comment.setCommentText(commentText);
 			comment.setCommentTime(LocalDateTime.now());
+			comment.setAccount(account);
 		}
 		try {
 			commentDao.save(comment);

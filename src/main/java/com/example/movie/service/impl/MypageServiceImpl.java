@@ -48,7 +48,7 @@ public class MypageServiceImpl implements MypageService {
 			mypage.setAccountMovieList(accountMovieList);
 		}
 		try {
-			mypageDao.save(new Mypage(account,mypage.getFavorit(),mypage.getWatchList(),mypage.getAccountMovieList()));
+			mypageDao.save(mypage);
 		} catch (Exception e) {
 			return new UserLoginRes(RtnCode.PAGE_CREATE_ERROR.getCode(), RtnCode.PAGE_CREATE_ERROR.getMessage());
 		}
@@ -58,6 +58,9 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public UserLoginRes search(String account) {
 		Optional<Mypage> op = mypageDao.findById(account);
+		if(op.isEmpty()) {
+			return new UserLoginRes(RtnCode.PAGE_CREATE_ERROR.getCode(), RtnCode.PAGE_CREATE_ERROR.getMessage());
+		}
 		return new MypageGetRes(RtnCode.SUCCESSFUL.getCode(),
 				RtnCode.SUCCESSFUL.getMessage(),op);
 	}

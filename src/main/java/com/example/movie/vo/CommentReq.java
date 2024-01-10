@@ -6,6 +6,8 @@ public class CommentReq {
 	
 	private int commentIndexOrder;
 	
+	private String account;
+
 	private String movie;
 	
 	private String commentText;
@@ -63,5 +65,13 @@ public class CommentReq {
 	}
 	
 	
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	
 }

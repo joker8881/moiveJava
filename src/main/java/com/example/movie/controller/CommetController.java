@@ -23,17 +23,17 @@ public class CommetController {
 
 	@PostMapping(value = "movie/comment/create")
 	public UserLoginRes create(@RequestBody CommentReq req) {
-		return commentService.create(req.getMovie(),req.getCommentText());
+		return commentService.create(req.getMovie(),req.getCommentText(),req.getAccount());
 	}
 	
 	@PostMapping(value = "movie/comment/createchild")
 	public UserLoginRes createchild(@RequestBody CommentReq req) {
-		return commentService.createchild(req.getCommentIndex(),req.getMovie(),req.getCommentText());
+		return commentService.createchild(req.getCommentIndex(),req.getMovie(),req.getCommentText(),req.getAccount());
 	}
 	
 	@PostMapping(value = "movie/comment/update")
 	public UserLoginRes update(@RequestBody CommentReq req) {
-				return commentService.update(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovie(),req.getCommentText());
+				return commentService.update(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovie(),req.getCommentText(),req.getAccount());
 	}
 	
 	@PostMapping(value = "movie/comment/delete")

@@ -59,5 +59,48 @@ public class UserServiceImpl implements UserService {
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
 
+	@Override
+	public UserLoginRes updatepwd(String account,String pwd,String newPwd) {
+        if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
+            return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+        }
+        Optional<User> op = userDao.findById(account);
+        if (op.isEmpty()) {
+            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+        }
+        User user = op.get();
+        if (!encoder.matches(pwd, user.getPwd())) {
+            return new UserLoginRes(RtnCode.PASSWORD_NOT_FIT.getCode(),RtnCode.PASSWORD_NOT_FIT.getMessage());
+        } else {
+        	String encodedPwd = encoder.encode(newPwd);
+        	user.setPwd(encodedPwd);
+        	userDao.save(user);
+        	
+        }
+        return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
+	
+	@Override
+	public UserLoginRes update(String account, String pwd, String email, int phone, String name) {
+        if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
+            return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+        }
+        Optional<User> op = userDao.findById(account);
+        if (op.isEmpty()) {
+            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+        }
+        User user = op.get();
+        if (!encoder.matches(pwd, user.getPwd())) {
+        	return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+        } else {
+        	user.setName(name);
+        	user.setEmail(email);
+        	user.setPhone(phone);
+        	userDao.save(user);
+        	
+        }
+        return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
+
 
 }

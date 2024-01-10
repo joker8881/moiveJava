@@ -1,27 +1,25 @@
 package com.example.movie.entity;
-import java.io.Serializable;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "buy_ticket")
-public class BuyTicket implements Serializable {
+@Table(name = "movieinfo")
+public class MovieInfo {
 	
-	private static final long serialVersionUID = 1L;
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "order")
 	private int order;
 	
-	@Id
 	@Column(name = "movie_name")
-	private int movieName;
+	private String movieName;
 	
 	@Column(name = "cinema")
 	private String cinema;
@@ -37,17 +35,24 @@ public class BuyTicket implements Serializable {
 	
 	@Column(name = "end_date")
 	private LocalDate endDate;
+
+	@Column(name = "on_date")
+	private LocalDate onDate;
 	
 	@Column(name = "on_time")
-	private LocalTime onTime;
+	private String onTime;
+	
 
-	public BuyTicket() {
+
+	public MovieInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public BuyTicket(int order, int movieName, String cinema, String area, int price, LocalDate startDate,
-			LocalDate endDate, LocalTime onTime) {
+
+
+	public MovieInfo(int order, String movieName, String cinema, String area, int price, LocalDate startDate,
+			LocalDate endDate, LocalDate onDate, String onTime) {
 		super();
 		this.order = order;
 		this.movieName = movieName;
@@ -56,73 +61,129 @@ public class BuyTicket implements Serializable {
 		this.price = price;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.onDate = onDate;
 		this.onTime = onTime;
 	}
+	
+	public MovieInfo(String movieName, String cinema, String area, int price, LocalDate startDate,
+			LocalDate endDate, LocalDate onDate, String onTime) {
+		super();
+		this.movieName = movieName;
+		this.cinema = cinema;
+		this.area = area;
+		this.price = price;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.onDate = onDate;
+		this.onTime = onTime;
+	}
+
 
 	public int getOrder() {
 		return order;
 	}
 
+
+
 	public void setOrder(int order) {
 		this.order = order;
 	}
 
-	public int getMovieName() {
+
+
+	public String getMovieName() {
 		return movieName;
 	}
 
-	public void setMovieName(int movieName) {
+
+
+	public void setMovieName(String movieName) {
 		this.movieName = movieName;
 	}
+
+
 
 	public String getCinema() {
 		return cinema;
 	}
 
+
+
 	public void setCinema(String cinema) {
 		this.cinema = cinema;
 	}
+
+
 
 	public String getArea() {
 		return area;
 	}
 
+
+
 	public void setArea(String area) {
 		this.area = area;
 	}
+
+
 
 	public int getPrice() {
 		return price;
 	}
 
+
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+
 
 	public LocalDate getStartDate() {
 		return startDate;
 	}
 
+
+
 	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
+
+
 
 	public LocalDate getEndDate() {
 		return endDate;
 	}
 
+
+
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
-	public LocalTime getOnTime() {
+
+
+	public LocalDate getOnDate() {
+		return onDate;
+	}
+
+
+
+	public void setOnDate(LocalDate onDate) {
+		this.onDate = onDate;
+	}
+
+
+
+	public String getOnTime() {
 		return onTime;
 	}
 
-	public void setOnTime(LocalTime onTime) {
+
+
+	public void setOnTime(String onTime) {
 		this.onTime = onTime;
 	}
-	
-	
 
+	
 }

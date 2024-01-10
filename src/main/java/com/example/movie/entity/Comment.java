@@ -39,6 +39,9 @@ public class Comment {
 
 	@Column(name = "dislike")
 	private int dislike;
+	
+	@Column(name = "account")
+	private String account;
 
 	public Comment() {
 		super();
@@ -46,7 +49,7 @@ public class Comment {
 	}
 
 	public Comment(int number,String movie, int commentIndex, int commentIndexOrder, String commentText, LocalDateTime commentTime,
-			int like, int dislike) {
+			int like, int dislike,String account) {
 		super();
 		this.movie = movie;
 		this.commentIndex = commentIndex;
@@ -55,10 +58,11 @@ public class Comment {
 		this.commentTime = commentTime;
 		this.favorite = like;
 		this.dislike = dislike;
+		this.account = account;
 	}
 
 	// Creatㄏノ把计
-	public Comment(String movie, int commentIndex, String commentText) {
+	public Comment(String movie, int commentIndex, String commentText,String account) {
 		super();
 		this.movie = movie;
 		this.commentIndex = commentIndex;
@@ -70,7 +74,7 @@ public class Comment {
 	}
 	
 	// Creatchildㄏノ把计
-	public Comment(String movie, int commentIndex,int commentIndexOrder, String commentText) {
+	public Comment(String movie, int commentIndex,int commentIndexOrder, String commentText,String account) {
 		super();
 		this.movie = movie;
 		this.commentIndex = commentIndex;
@@ -143,6 +147,14 @@ public class Comment {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 	
 	

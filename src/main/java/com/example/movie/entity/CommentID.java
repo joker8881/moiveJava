@@ -1,9 +1,7 @@
 package com.example.movie.entity;
 
-import java.io.Serializable;
 
-@SuppressWarnings("serial")
-class CommentId implements Serializable {
+class CommentId {
 
     private String movie;
 
