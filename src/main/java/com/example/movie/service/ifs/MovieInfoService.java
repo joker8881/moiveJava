@@ -9,10 +9,10 @@ public interface MovieInfoService {
 	public UserLoginRes create(String movie, String cinema, String area, int price,
 			LocalDate startDate, LocalDate endDate, LocalDate onDate, String time);
 
-	public UserLoginRes update(int order, String movie, String cinema, String area, int price,
+	public UserLoginRes update(int number, String movie, String cinema, String area, int price,
 			LocalDate startDate, LocalDate endDate, LocalDate onDate, String time);
 	
-	public UserLoginRes delete(int order);
+	public UserLoginRes delete(int number);
 	
 	public UserLoginRes search(String movie, String cinema, String area, 
 			LocalDate startDate, LocalDate endDate);

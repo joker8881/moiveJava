@@ -15,6 +15,7 @@ public enum RtnCode {
 	ART_IS_NOT_FOUND(400,"Art is not found!"),
 	ART_DLETE_ORDER_NOT_FOUND(400,"Art dlete order not found!"),
 	DELETED_MOVIE_INFO_NOT_EXSISTED(400,"Deleted movie info not exsisted!"),
+	DELETED_BUY_INFO_NOT_EXSISTED(400,"Deleted buy info not exsisted!"),
 	CHECK_MOVIE_INPUT(400,"Check movie input"),
 	CHECK_CINEMA_INPUT(400,"Check cinema input"),
 	CHECK_AREA_INPUT(400,"Check area input"),
@@ -23,6 +24,9 @@ public enum RtnCode {
 	CHECK_ENDDATE_INPUT(400,"Check enddate input"),
 	CHECK_ONDATE_INPUT(400,"Check ondate input"),
 	CHECK_ONTIME_INPUT(400,"Check ontime input"),
+	CHECK_SEAT_INPUT(400,"Check seat input"),
+	DUPLICATE_SEAT(400,"Duplicate seat!"),
+	MOVIE_INFO_SAVE_ERROR(400,"Movie info save error"),
 	ACCOUNT_EXISTED(400,"Account existed!");
 	
 	private int code;

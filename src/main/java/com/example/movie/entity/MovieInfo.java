@@ -15,11 +15,11 @@ public class MovieInfo {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name = "order")
-	private int order;
+	@Column(name = "number")
+	private int number;
 	
 	@Column(name = "movie_name")
-	private String movieName;
+	private String movie;
 	
 	@Column(name = "cinema")
 	private String cinema;
@@ -51,11 +51,11 @@ public class MovieInfo {
 
 
 
-	public MovieInfo(int order, String movieName, String cinema, String area, int price, LocalDate startDate,
+	public MovieInfo(int number, String movie, String cinema, String area, int price, LocalDate startDate,
 			LocalDate endDate, LocalDate onDate, String onTime) {
 		super();
-		this.order = order;
-		this.movieName = movieName;
+		this.number = number;
+		this.movie = movie;
 		this.cinema = cinema;
 		this.area = area;
 		this.price = price;
@@ -65,10 +65,10 @@ public class MovieInfo {
 		this.onTime = onTime;
 	}
 	
-	public MovieInfo(String movieName, String cinema, String area, int price, LocalDate startDate,
+	public MovieInfo(String movie, String cinema, String area, int price, LocalDate startDate,
 			LocalDate endDate, LocalDate onDate, String onTime) {
 		super();
-		this.movieName = movieName;
+		this.movie = movie;
 		this.cinema = cinema;
 		this.area = area;
 		this.price = price;
@@ -79,26 +79,26 @@ public class MovieInfo {
 	}
 
 
-	public int getOrder() {
-		return order;
+	public int getNumber() {
+		return number;
 	}
 
 
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 
 
-	public String getMovieName() {
-		return movieName;
+	public String getMovie() {
+		return movie;
 	}
 
 
 
-	public void setMovieName(String movieName) {
-		this.movieName = movieName;
+	public void setMovie(String movie) {
+		this.movie = movie;
 	}
 
 

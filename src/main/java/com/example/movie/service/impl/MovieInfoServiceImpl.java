@@ -17,7 +17,7 @@ import com.example.movie.vo.MovieInfoGetRes;
 import com.example.movie.vo.UserLoginRes;
 
 @Service
-public class MovieServiceImpl implements MovieInfoService {
+public class MovieInfoServiceImpl implements MovieInfoService {
 	
     @Autowired
     private MovieInfoDAO movieInfoDao;
@@ -56,7 +56,7 @@ public class MovieServiceImpl implements MovieInfoService {
     }
     
 	@Override
-	public UserLoginRes update(int order,String movie, String cinema, String area, int price,
+	public UserLoginRes update(int number,String movie, String cinema, String area, int price,
 			LocalDate startDate, LocalDate endDate, LocalDate onDate, String time) {
         if (!StringUtils.hasText(movie)) {
             return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
@@ -82,10 +82,10 @@ public class MovieServiceImpl implements MovieInfoService {
         if (!StringUtils.hasText(time)) {
             return new UserLoginRes(RtnCode.CHECK_ONTIME_INPUT.getCode(),RtnCode.CHECK_ONTIME_INPUT.getMessage());
         }
-        Optional<MovieInfo> op = movieInfoDao.findByOrderAndMovieAndCinemaAndArea(order,movie,cinema,area);
+        Optional<MovieInfo> op = movieInfoDao.findByNumber(number);
         MovieInfo movieinfo = op.get();
 		try {
-			movieinfo.setMovieName(movie);
+			movieinfo.setMovie(movie);
 			movieinfo.setCinema(cinema);
 			movieinfo.setArea(area);
 			movieinfo.setPrice(price);
@@ -94,16 +94,17 @@ public class MovieServiceImpl implements MovieInfoService {
 			movieinfo.setOnDate(onDate);
 			movieinfo.setOnTime(time);
 			movieInfoDao.save(movieinfo);
+//			movieInfoDao.updateInfo(order,movie,cinema,area,price,startDate,endDate,onDate,time);
 		} catch (Exception e) {
-			return new UserLoginRes(RtnCode.PAGE_CREATE_ERROR.getCode(), RtnCode.PAGE_CREATE_ERROR.getMessage());
+			return new UserLoginRes(RtnCode.MOVIE_INFO_SAVE_ERROR.getCode(), RtnCode.MOVIE_INFO_SAVE_ERROR.getMessage());
 		}
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 
 
 	@Override
-	public UserLoginRes delete(int order) {
-		int res = movieInfoDao.deleteByOrder(order);
+	public UserLoginRes delete(int number) {
+		int res = movieInfoDao.deleteByNumber(number);
 		if(res == 0) {
 			return new UserLoginRes(RtnCode.DELETED_MOVIE_INFO_NOT_EXSISTED.getCode(), RtnCode.DELETED_MOVIE_INFO_NOT_EXSISTED.getMessage());
 		}else {
@@ -120,7 +121,7 @@ public class MovieServiceImpl implements MovieInfoService {
 		startDate = startDate== null ? LocalDate.of(1970,01,01) : startDate;
 		endDate = endDate == null ? LocalDate.of(2099,12,31) : endDate;
 		List<MovieInfo> res = new ArrayList<>();
-			res = movieInfoDao.findByMovieNameContainingAndCinemaContainingAndAreaContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(movie,cinema,area,startDate,endDate);
+			res = movieInfoDao.findByMovieContainingAndCinemaContainingAndAreaContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(movie,cinema,area,startDate,endDate);
 				return new MovieInfoGetRes(RtnCode.SUCCESSFUL.getCode(),
 						RtnCode.SUCCESSFUL.getMessage(),res);
 

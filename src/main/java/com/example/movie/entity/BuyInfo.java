@@ -1,6 +1,7 @@
 package com.example.movie.entity;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,25 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "movieinfo")
+@Table(name = "buyinfo")
 public class BuyInfo {
 	
 	@Id
-	@Column(name = "order")
-	private int order;
+	@Column(name = "number")
+	private int number;
 	
 	@Column(name = "account")
 	private String account;
+	
+	@Column(name = "movie")
+	private String movie;
 	
 	@Column(name = "cinema")
 	private String cinema;
 	
 	@Column(name = "area")
 	private String area;
-	
-	@Column(name = "movie")
-	private String movie;
-	
+
 	@Column(name = "price")
 	private int price;
 	
@@ -43,11 +44,33 @@ public class BuyInfo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
-	public BuyInfo(int order, String account, String cinema, String area, String movie, int price, LocalDate date,
+	public BuyInfo(String seat) {
+		super();
+		this.seat = seat;
+	}
+
+
+
+	public BuyInfo(int number, String account, String cinema, String area, String movie, int price, LocalDate date,
 			String onTime, String seat) {
 		super();
-		this.order = order;
+		this.number = number;
+		this.account = account;
+		this.cinema = cinema;
+		this.area = area;
+		this.movie = movie;
+		this.price = price;
+		this.date = date;
+		this.onTime = onTime;
+		this.seat = seat;
+	}
+	
+	public BuyInfo(String account, String movie, String cinema, String area, int price, LocalDate date,
+			String onTime, String seat) {
+		super();
 		this.account = account;
 		this.cinema = cinema;
 		this.area = area;
@@ -58,12 +81,12 @@ public class BuyInfo {
 		this.seat = seat;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getNumber() {
+		return number;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 	public String getAccount() {

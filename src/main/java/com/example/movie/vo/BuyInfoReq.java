@@ -1,14 +1,16 @@
 package com.example.movie.vo;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MovieInfoReq {
+public class BuyInfoReq {
 	
 	private int number;
 	
-	@JsonProperty("movie")
+	private String account;
+	
 	private String movie;
 	
 	private String cinema;
@@ -17,13 +19,11 @@ public class MovieInfoReq {
 	
 	private int price;
 	
-	private LocalDate startDate;
-	
-	private LocalDate endDate;
-	
 	private LocalDate onDate;
 	
 	private String onTime;
+	
+	private String seat;
 
 	public int getNumber() {
 		return number;
@@ -31,6 +31,14 @@ public class MovieInfoReq {
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getMovie() {
@@ -65,22 +73,6 @@ public class MovieInfoReq {
 		this.price = price;
 	}
 
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
-
 	public LocalDate getOnDate() {
 		return onDate;
 	}
@@ -96,8 +88,15 @@ public class MovieInfoReq {
 	public void setOnTime(String onTime) {
 		this.onTime = onTime;
 	}
-	
-	
 
+	public String getSeat() {
+		return seat;
+	}
+
+	public void setSeat(String seat) {
+		this.seat = seat;
+	}
+	
+	
 	
 }
