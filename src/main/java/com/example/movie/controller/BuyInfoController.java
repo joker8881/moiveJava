@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.movie.service.ifs.ArtworkService;
 import com.example.movie.service.ifs.BuyInfoService;
-import com.example.movie.service.ifs.MovieInfoService;
-import com.example.movie.vo.ArtworkReq;
 import com.example.movie.vo.BuyInfoReq;
-import com.example.movie.vo.MovieInfoReq;
 import com.example.movie.vo.UserLoginRes;
 
 @CrossOrigin(origins = "*")

@@ -20,32 +20,32 @@ public class CommentServiceImpl implements CommentService {
     private CommentDAO commentDao;
 
     @Override
-    public UserLoginRes create(String movie,String commentText,String account) {
+    public UserLoginRes create(String movie,int movieID,String commentText,String account) {
         if (!StringUtils.hasText(commentText)) {
             return new UserLoginRes(RtnCode.COMMENT_TEXT_IS_NONE.getCode(),RtnCode.COMMENT_TEXT_IS_NONE.getMessage());
         }
         if (!StringUtils.hasText(account)) {
             return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
-        Optional<Comment> op = commentDao.findAllByMovie(movie);
+        Optional<Comment> op = commentDao.findAllByMovieID(movieID);
         Comment comment = null;
         if(op.isEmpty()) {
-        	comment = commentDao.save(new Comment(movie, 1, commentText,account));
+        	comment = commentDao.save(new Comment(movie,movieID, 1, commentText,account));
         } else {
         	comment = op.get();
             int x = comment.getCommentIndex() + 1 ;
             
-            commentDao.save(new Comment(movie, x, commentText,account));
+            commentDao.save(new Comment(movie,movieID, x, commentText,account));
         }
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
     
 	@Override
-	public UserLoginRes createchild(int commentIndex, String movie, String commentText,String account) {
+	public UserLoginRes createchild(int commentIndex, String movie,int movieID, String commentText,String account) {
         if (!StringUtils.hasText(commentText)) {
             return new UserLoginRes(RtnCode.COMMENT_TEXT_IS_NONE.getCode(),RtnCode.COMMENT_TEXT_IS_NONE.getMessage());
         }
-        Optional<Comment> op = commentDao.findTopByMovieAndCommentIndexOrderByCommentIndexOrderDesc(movie,commentIndex);
+        Optional<Comment> op = commentDao.findTopByMovieAndCommentIndexOrderByCommentIndexOrderDesc(movieID,commentIndex);
         Comment comment;
         
         if(op.isPresent()) {
@@ -61,11 +61,11 @@ public class CommentServiceImpl implements CommentService {
 
 
 	@Override
-	public UserLoginRes update(int commentIndex,int commentIndexOrder, String movie, String commentText,String account) {
+	public UserLoginRes update(int commentIndex,int commentIndexOrder, String movie,int movieID, String commentText,String account) {
 		if(commentIndex ==0 || (commentIndex==0 && commentIndexOrder==0) || StringUtils.hasText(movie) || StringUtils.hasText(commentText) || StringUtils.hasText(account)) {
 			return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
 		}
-		Optional<Comment> op = commentDao.findByCommentIndexAndCommentIndexOrderAndMovie(commentIndex,commentIndexOrder,movie);
+		Optional<Comment> op = commentDao.findByCommentIndexAndCommentIndexOrderAndMovieID(commentIndex,commentIndexOrder,movieID);
 		if (op.isEmpty()){
 			return new UserLoginRes(RtnCode.MOVIE_COMMENT_NOT_FOUND.getCode(),RtnCode.MOVIE_COMMENT_NOT_FOUND.getMessage());
 		}
@@ -87,8 +87,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public UserLoginRes delete(int commentIndex,int commentIndexOrder,String movie) {
-		int res = commentDao.deleteByCommentIndexAndCommentIndexOrderAndMovie(commentIndex,commentIndexOrder,movie);
+	public UserLoginRes delete(int commentIndex,int commentIndexOrder,int movieID) {
+		int res = commentDao.deleteByCommentIndexAndCommentIndexOrderAndMovieID(commentIndex,commentIndexOrder,movieID);
 		if(res == 0) {
 			return new UserLoginRes(RtnCode.COMMENT_IS_NOT_EXSISTED.getCode(), RtnCode.COMMENT_IS_NOT_EXSISTED.getMessage());
 		}else {
@@ -98,8 +98,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public UserLoginRes likeAndDislike(int commentIndex, int commentIndexOrder, String movie, int like, int dislike) {
-        Optional<Comment> op = commentDao.findByCommentIndexAndCommentIndexOrderAndMovie(commentIndex,commentIndexOrder,movie);
+	public UserLoginRes likeAndDislike(int commentIndex, int commentIndexOrder,int movieID, int like, int dislike) {
+        Optional<Comment> op = commentDao.findByCommentIndexAndCommentIndexOrderAndMovieID(commentIndex,commentIndexOrder,movieID);
         Comment comment = op.get();
         if(comment.getCommentIndex() != commentIndex) {
         	return new UserLoginRes(RtnCode.COMMENT_IS_NOT_EXSISTED.getCode(), RtnCode.COMMENT_IS_NOT_EXSISTED.getMessage());

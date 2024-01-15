@@ -23,27 +23,27 @@ public class CommetController {
 
 	@PostMapping(value = "movie/comment/create")
 	public UserLoginRes create(@RequestBody CommentReq req) {
-		return commentService.create(req.getMovie(),req.getCommentText(),req.getAccount());
+		return commentService.create(req.getMovie(),req.getMovieID(),req.getCommentText(),req.getAccount());
 	}
 	
 	@PostMapping(value = "movie/comment/createchild")
 	public UserLoginRes createchild(@RequestBody CommentReq req) {
-		return commentService.createchild(req.getCommentIndex(),req.getMovie(),req.getCommentText(),req.getAccount());
+		return commentService.createchild(req.getCommentIndex(),req.getMovie(),req.getMovieID(),req.getCommentText(),req.getAccount());
 	}
 	
 	@PostMapping(value = "movie/comment/update")
 	public UserLoginRes update(@RequestBody CommentReq req) {
-				return commentService.update(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovie(),req.getCommentText(),req.getAccount());
+				return commentService.update(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovie(),req.getMovieID(),req.getCommentText(),req.getAccount());
 	}
 	
 	@PostMapping(value = "movie/comment/delete")
 	public UserLoginRes delete(@RequestBody CommentReq req) {
-		return commentService.delete(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovie());
+		return commentService.delete(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovieID());
 	}
 	
 	@PostMapping(value = "movie/comment/likeAndDislike")
 	public UserLoginRes likeAndDislike(@RequestBody CommentReq req) {
-				return commentService.likeAndDislike(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovie(),req.getLike(),req.getDislike());
+				return commentService.likeAndDislike(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovieID(),req.getLike(),req.getDislike());
 	}
 
 }

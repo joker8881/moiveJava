@@ -13,12 +13,12 @@ import com.example.movie.entity.Comment;
 public interface CommentDAO extends JpaRepository<Comment, String>{
 	
 	@Transactional
-	public int deleteByCommentIndexAndCommentIndexOrderAndMovie(int commentIndex,int commentIndexOrder, String movie);
+	public int deleteByCommentIndexAndCommentIndexOrderAndMovieID(int commentIndex,int commentIndexOrder, int movieID);
 	
-	public Optional<Comment> findByCommentIndexAndCommentIndexOrderAndMovie(int commentIndex,int commentIndexOrder, String movie);
+	public Optional<Comment> findByCommentIndexAndCommentIndexOrderAndMovieID(int commentIndex,int commentIndexOrder, int movieID);
 	
-	public Optional<Comment> findAllByMovie(String movie);
+	public Optional<Comment> findAllByMovieID(int movieID);
 	
-	public Optional<Comment> findTopByMovieAndCommentIndexOrderByCommentIndexOrderDesc(String movie, int commentIndex);
+	public Optional<Comment> findTopByMovieAndCommentIndexOrderByCommentIndexOrderDesc(int movieID, int commentIndex);
 	
 }

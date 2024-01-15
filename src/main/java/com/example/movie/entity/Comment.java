@@ -18,6 +18,9 @@ public class Comment {
 	@Id
 	@Column(name = "number")
 	private String number;	
+	
+	@Column(name = "movie_id")
+	private int movieID;
 
 	@Column(name = "movie")
 	private String movie;
@@ -48,10 +51,11 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int number,String movie, int commentIndex, int commentIndexOrder, String commentText, LocalDateTime commentTime,
+	public Comment(int number,int movieID,String movie, int commentIndex, int commentIndexOrder, String commentText, LocalDateTime commentTime,
 			int like, int dislike,String account) {
 		super();
 		this.movie = movie;
+		this.movieID = movieID;
 		this.commentIndex = commentIndex;
 		this.commentIndexOrder = commentIndexOrder;
 		this.commentText = commentText;
@@ -62,9 +66,10 @@ public class Comment {
 	}
 
 	// Creatㄏノ把计
-	public Comment(String movie, int commentIndex, String commentText,String account) {
+	public Comment(String movie,int movieID, int commentIndex, String commentText,String account) {
 		super();
 		this.movie = movie;
+		this.movieID = movieID;
 		this.commentIndex = commentIndex;
 		this.commentIndexOrder = 0;
 		this.commentText = commentText;
@@ -74,9 +79,10 @@ public class Comment {
 	}
 	
 	// Creatchildㄏノ把计
-	public Comment(String movie, int commentIndex,int commentIndexOrder, String commentText,String account) {
+	public Comment(String movie,int movieID, int commentIndex,int commentIndexOrder, String commentText,String account) {
 		super();
 		this.movie = movie;
+		this.movieID = movieID;
 		this.commentIndex = commentIndex;
 		this.commentIndexOrder = commentIndexOrder;
 		this.commentText = commentText;
@@ -155,6 +161,14 @@ public class Comment {
 
 	public void setAccount(String account) {
 		this.account = account;
+	}
+
+	public int getMovieID() {
+		return movieID;
+	}
+
+	public void setMovieID(int movieID) {
+		this.movieID = movieID;
 	}
 	
 	
