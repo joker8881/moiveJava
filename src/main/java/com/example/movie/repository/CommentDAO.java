@@ -1,5 +1,6 @@
 package com.example.movie.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -13,12 +14,14 @@ import com.example.movie.entity.Comment;
 public interface CommentDAO extends JpaRepository<Comment, String>{
 	
 	@Transactional
-	public int deleteByCommentIndexAndCommentIndexOrderAndMovieID(int commentIndex,int commentIndexOrder, int movieID);
+	public int deleteByCommentIndexAndCommentIndexIndexAndMovieID(int commentIndex,int commentIndexIndex, int movieID);
 	
-	public Optional<Comment> findByCommentIndexAndCommentIndexOrderAndMovieID(int commentIndex,int commentIndexOrder, int movieID);
+	public Optional<Comment> findByCommentIndexAndCommentIndexIndexAndMovieID(int commentIndex,int commentIndexIndex, int movieID);
 	
-	public Optional<Comment> findAllByMovieID(int movieID);
+	public Optional<Comment> findTopByMovieIDOrderByCommentIndexDesc(int movieID);
 	
-	public Optional<Comment> findTopByMovieAndCommentIndexOrderByCommentIndexOrderDesc(int movieID, int commentIndex);
+	public Optional<Comment> findTopByMovieAndCommentIndexOrderByCommentIndexIndexDesc(int movieID, int commentIndex);
+	
+	public List<Comment> findAllByMovieID(int movieID);
 	
 }

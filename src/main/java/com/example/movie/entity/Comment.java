@@ -29,7 +29,7 @@ public class Comment {
 	private int commentIndex;
 
 	@Column(name = "comment_index_order")
-	private int commentIndexOrder;
+	private int commentIndexIndex;
 
 	@Column(name = "comment_text")
 	private String commentText;
@@ -51,13 +51,14 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int number,int movieID,String movie, int commentIndex, int commentIndexOrder, String commentText, LocalDateTime commentTime,
+	public Comment(int number,int movieID,String movie, int commentIndex, int commentIndexIndex, String commentText, LocalDateTime commentTime,
 			int like, int dislike,String account) {
 		super();
 		this.movie = movie;
 		this.movieID = movieID;
+		this.account = account;
 		this.commentIndex = commentIndex;
-		this.commentIndexOrder = commentIndexOrder;
+		this.commentIndexIndex = commentIndexIndex;
 		this.commentText = commentText;
 		this.commentTime = commentTime;
 		this.favorite = like;
@@ -70,8 +71,9 @@ public class Comment {
 		super();
 		this.movie = movie;
 		this.movieID = movieID;
+		this.account = account;
 		this.commentIndex = commentIndex;
-		this.commentIndexOrder = 0;
+		this.commentIndexIndex = 0;
 		this.commentText = commentText;
 		this.commentTime = LocalDateTime.now();
 		this.favorite = 0;
@@ -79,12 +81,13 @@ public class Comment {
 	}
 	
 	// Creatchild使用的參數
-	public Comment(String movie,int movieID, int commentIndex,int commentIndexOrder, String commentText,String account) {
+	public Comment(String movie,int movieID, int commentIndex,int commentIndexIndex, String commentText,String account) {
 		super();
 		this.movie = movie;
 		this.movieID = movieID;
+		this.account = account;
 		this.commentIndex = commentIndex;
-		this.commentIndexOrder = commentIndexOrder;
+		this.commentIndexIndex = commentIndexIndex;
 		this.commentText = commentText;
 		this.commentTime = LocalDateTime.now();
 		this.favorite = 0;
@@ -107,12 +110,12 @@ public class Comment {
 		this.commentIndex = commentIndex;
 	}
 
-	public int getCommentIndexOrder() {
-		return commentIndexOrder;
+	public int getCommentIndexIndex() {
+		return commentIndexIndex;
 	}
 
-	public void setCommentIndexOrder(int commentIndexOrder) {
-		this.commentIndexOrder = commentIndexOrder;
+	public void setCommentIndexIndex(int commentIndexIndex) {
+		this.commentIndexIndex = commentIndexIndex;
 	}
 
 	public String getCommentText() {

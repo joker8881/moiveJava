@@ -45,5 +45,10 @@ public class CommetController {
 	public UserLoginRes likeAndDislike(@RequestBody CommentReq req) {
 				return commentService.likeAndDislike(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovieID(),req.getLike(),req.getDislike());
 	}
+	
+	@PostMapping(value = "movie/comment/search")
+	public UserLoginRes search(@RequestBody CommentReq req) {
+				return commentService.search(req.getMovieID());
+	}
 
 }

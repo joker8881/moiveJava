@@ -13,5 +13,6 @@ public interface CommentService {
 	public UserLoginRes delete(int commentIndex,int commentIndexOrder,int movieID);
 	
 	public UserLoginRes likeAndDislike(int commentIndex,int commentIndexOrder,int movieID,int like,int dislike);
-
+	
+	public UserLoginRes search(int movieID);
 }
