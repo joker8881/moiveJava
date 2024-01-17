@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserLoginRes create(String account, String pwd, String email,int phone, String name) {
-        if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
+    	if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
             return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
         if (userDao.existsById(account)) {

@@ -13,7 +13,6 @@ import com.example.movie.entity.Comment;
 import com.example.movie.repository.CommentDAO;
 import com.example.movie.service.ifs.CommentService;
 import com.example.movie.vo.CommentGetRes;
-import com.example.movie.vo.MovieInfoGetRes;
 import com.example.movie.vo.UserLoginRes;
 
 @Service
