@@ -22,13 +22,13 @@ public class BuyInfoController {
 
 	@PostMapping(value = "movie/buyinfo/create")
 	public UserLoginRes create(@RequestBody BuyInfoReq req) {
-		return buyInfoService.create(req.getAccount(),req.getMovie(),req.getCinema(),req.getArea(),req.getPrice(),
+		return buyInfoService.create(req.getAccount(),req.getMovie(),req.getMovieId(),req.getCinema(),req.getArea(),req.getPrice(),
 				req.getOnDate(),req.getOnTime(),req.getSeat());
 	}
 	
 	@PostMapping(value = "movie/buyinfo/update")
 	public UserLoginRes update(@RequestBody BuyInfoReq req) {
-				return buyInfoService.update(req.getNumber(),req.getAccount(),req.getMovie(),req.getCinema(),req.getArea(),req.getPrice(),
+				return buyInfoService.update(req.getNumber(),req.getAccount(),req.getMovie(),req.getMovieId(),req.getCinema(),req.getArea(),req.getPrice(),
 						req.getOnDate(),req.getOnTime(),req.getSeat());
 	}
 	
@@ -40,6 +40,11 @@ public class BuyInfoController {
 	@PostMapping(value = "movie/buyinfo/search")
 	public UserLoginRes search(@RequestBody BuyInfoReq req) {
 				return buyInfoService.search(req.getAccount());
+	}
+	
+	@PostMapping(value = "movie/buyinfo/searchseat")
+	public UserLoginRes searchseat(@RequestBody BuyInfoReq req) {
+				return buyInfoService.searchseat(req.getMovieId(),req.getMovie(),req.getCinema(),req.getArea());
 	}
 
 }

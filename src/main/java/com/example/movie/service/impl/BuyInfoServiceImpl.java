@@ -28,7 +28,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
     private BuyInfoDAO buyInfoDao;
 
     @Override
-    public UserLoginRes create(String account, String movie, String cinema, String area, int price,
+    public UserLoginRes create(String account, String movie,int movieId, String cinema, String area, int price,
 			LocalDate onDate, String time, String seat) {
         if (!StringUtils.hasText(account)) {
             return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
@@ -66,13 +66,13 @@ public class BuyInfoServiceImpl implements BuyInfoService {
             }
         }
 
-        buyInfoDao.save(new BuyInfo(account,movie,cinema,area,price,onDate,time,seat));
+        buyInfoDao.save(new BuyInfo(account,movie,movieId,cinema,area,price,onDate,time,seat));
         
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
     
 	@Override
-	public UserLoginRes update(int number, String account, String movie, String cinema, String area, int price,
+	public UserLoginRes update(int number, String account, String movie,int movieId, String cinema, String area, int price,
 			LocalDate onDate, String time, String seat) {
         if (!StringUtils.hasText(seat)) {
             return new UserLoginRes(RtnCode.CHECK_SEAT_INPUT.getCode(),RtnCode.CHECK_SEAT_INPUT.getMessage());
@@ -155,18 +155,23 @@ public class BuyInfoServiceImpl implements BuyInfoService {
 		return new BuyInfoGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
 	}
 	
-//	@Override
-//	public UserLoginRes search(String movie, String cinema, String area, 
-//			LocalDate startDate, LocalDate endDate) {
-//		movie = !StringUtils.hasText(movie) ? "" : movie;
-//		cinema = !StringUtils.hasText(cinema) ? "" : cinema;
-//		area = !StringUtils.hasText(area) ? "" : area;
-//		startDate = startDate== null ? LocalDate.of(1970,01,01) : startDate;
-//		endDate = endDate == null ? LocalDate.of(2099,12,31) : endDate;
-//		List<MovieInfo> res = new ArrayList<>();
-//			res = buyInfoDao.findByMovieContainingAndCinemaContainingAndAreaContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(movie,cinema,area,startDate,endDate);
-//				return new MovieInfoGetRes(RtnCode.SUCCESSFUL.getCode(),
-//						RtnCode.SUCCESSFUL.getMessage(),res);
-//	}
+	@Override
+	public UserLoginRes searchseat(int movieId,String movie,String cinema,String area) {
+        if (movieId ==0) {
+            return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
+        }
+        if (!StringUtils.hasText(movie)) {
+            return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
+        }
+        if (!StringUtils.hasText(cinema)) {
+            return new UserLoginRes(RtnCode.CHECK_CINEMA_INPUT.getCode(),RtnCode.CHECK_CINEMA_INPUT.getMessage());
+        }
+        if (!StringUtils.hasText(area)) {
+            return new UserLoginRes(RtnCode.CHECK_AREA_INPUT.getCode(),RtnCode.CHECK_AREA_INPUT.getMessage());
+        }
+		List<BuyInfo> res = new ArrayList<>();
+		res = buyInfoDao.findAllByMovieIdAndCinemaAndArea(movieId,cinema,area);
+		return new BuyInfoGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
+	}
 
 }

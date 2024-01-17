@@ -23,8 +23,11 @@ public class MovieInfoServiceImpl implements MovieInfoService {
     private MovieInfoDAO movieInfoDao;
 
     @Override
-    public UserLoginRes create(String movie, String cinema, String area, int price,
+    public UserLoginRes create(int movieId,String movie, String cinema, String area, int price,
 			LocalDate startDate, LocalDate endDate, LocalDate onDate, String time) {
+        if (movieId==0) {
+            return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
+        }
         if (!StringUtils.hasText(movie)) {
             return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
         }
@@ -50,7 +53,7 @@ public class MovieInfoServiceImpl implements MovieInfoService {
             return new UserLoginRes(RtnCode.CHECK_ONTIME_INPUT.getCode(),RtnCode.CHECK_ONTIME_INPUT.getMessage());
         }
 
-        movieInfoDao.save(new MovieInfo(movie,cinema,area,price,startDate,endDate,onDate,time));
+        movieInfoDao.save(new MovieInfo(movieId,movie,cinema,area,price,startDate,endDate,onDate,time));
         
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }

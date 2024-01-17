@@ -24,7 +24,7 @@ public class MovieInfoController {
 
 	@PostMapping(value = "movie/movieinfo/create")
 	public UserLoginRes create(@RequestBody MovieInfoReq req) {
-		return movieInfoService.create(req.getMovie(),req.getCinema(),req.getArea(),req.getPrice(),
+		return movieInfoService.create(req.getMovieId(),req.getMovie(),req.getCinema(),req.getArea(),req.getPrice(),
 				req.getStartDate(),req.getEndDate(),req.getOnDate(),req.getOnTime());
 	}
 	

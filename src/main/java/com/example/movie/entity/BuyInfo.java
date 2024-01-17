@@ -19,6 +19,9 @@ public class BuyInfo {
 	@Column(name = "account")
 	private String account;
 	
+	@Column(name = "movie_id")
+	private int movieId;
+	
 	@Column(name = "movie")
 	private String movie;
 	
@@ -51,30 +54,40 @@ public class BuyInfo {
 		super();
 		this.seat = seat;
 	}
+	
+	public BuyInfo(String movie,int movieId, String cinema, String area) {
+		super();
+		this.movie = movie;
+		this.movieId = movieId;
+		this.cinema = cinema;
+		this.area = area;
+	}
 
 
 
-	public BuyInfo(int number, String account, String cinema, String area, String movie, int price, LocalDate date,
+	public BuyInfo(int number, String account, String movie,int movieId, String cinema, String area, int price, LocalDate date,
 			String onTime, String seat) {
 		super();
 		this.number = number;
 		this.account = account;
+		this.movie = movie;
+		this.movieId = movieId;
 		this.cinema = cinema;
 		this.area = area;
-		this.movie = movie;
 		this.price = price;
 		this.date = date;
 		this.onTime = onTime;
 		this.seat = seat;
 	}
 	
-	public BuyInfo(String account, String movie, String cinema, String area, int price, LocalDate date,
+	public BuyInfo(String account, String movie,int movieId, String cinema, String area, int price, LocalDate date,
 			String onTime, String seat) {
 		super();
 		this.account = account;
+		this.movie = movie;
+		this.movieId = movieId;
 		this.cinema = cinema;
 		this.area = area;
-		this.movie = movie;
 		this.price = price;
 		this.date = date;
 		this.onTime = onTime;
@@ -151,6 +164,18 @@ public class BuyInfo {
 
 	public void setSeat(String seat) {
 		this.seat = seat;
+	}
+
+
+
+	public int getMovieId() {
+		return movieId;
+	}
+
+
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
 
 	

@@ -6,7 +6,7 @@ import com.example.movie.vo.UserLoginRes;
 
 public interface MovieInfoService {
 	
-	public UserLoginRes create(String movie, String cinema, String area, int price,
+	public UserLoginRes create(int movieId,String movie, String cinema, String area, int price,
 			LocalDate startDate, LocalDate endDate, LocalDate onDate, String time);
 
 	public UserLoginRes update(int number, String movie, String cinema, String area, int price,

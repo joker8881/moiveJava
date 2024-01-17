@@ -11,6 +11,8 @@ public class MovieInfoReq {
 	@JsonProperty("movie")
 	private String movie;
 	
+	private int movieId;
+	
 	private String cinema;
 	
 	private String area;
@@ -95,6 +97,14 @@ public class MovieInfoReq {
 
 	public void setOnTime(String onTime) {
 		this.onTime = onTime;
+	}
+
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
 	
 	

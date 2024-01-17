@@ -18,6 +18,9 @@ public class MovieInfo {
 	@Column(name = "number")
 	private int number;
 	
+	@Column(name = "movie_id")
+	private int movieId;
+	
 	@Column(name = "movie_name")
 	private String movie;
 	
@@ -51,10 +54,11 @@ public class MovieInfo {
 
 
 
-	public MovieInfo(int number, String movie, String cinema, String area, int price, LocalDate startDate,
+	public MovieInfo(int number,int movieId, String movie, String cinema, String area, int price, LocalDate startDate,
 			LocalDate endDate, LocalDate onDate, String onTime) {
 		super();
 		this.number = number;
+		this.movieId = movieId;
 		this.movie = movie;
 		this.cinema = cinema;
 		this.area = area;
@@ -68,6 +72,20 @@ public class MovieInfo {
 	public MovieInfo(String movie, String cinema, String area, int price, LocalDate startDate,
 			LocalDate endDate, LocalDate onDate, String onTime) {
 		super();
+		this.movie = movie;
+		this.cinema = cinema;
+		this.area = area;
+		this.price = price;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.onDate = onDate;
+		this.onTime = onTime;
+	}
+	
+	public MovieInfo(int movieId,String movie, String cinema, String area, int price, LocalDate startDate,
+			LocalDate endDate, LocalDate onDate, String onTime) {
+		super();
+		this.movieId = movieId;
 		this.movie = movie;
 		this.cinema = cinema;
 		this.area = area;
@@ -183,6 +201,18 @@ public class MovieInfo {
 
 	public void setOnTime(String onTime) {
 		this.onTime = onTime;
+	}
+
+
+
+	public int getMovieId() {
+		return movieId;
+	}
+
+
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
 
 	

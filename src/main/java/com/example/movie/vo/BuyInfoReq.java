@@ -13,6 +13,8 @@ public class BuyInfoReq {
 	
 	private String movie;
 	
+	private int movieId;
+
 	private String cinema;
 	
 	private String area;
@@ -98,5 +100,13 @@ public class BuyInfoReq {
 	}
 	
 	
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
+	}
+
 	
 }
