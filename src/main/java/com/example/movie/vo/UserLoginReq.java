@@ -57,6 +57,14 @@ public class UserLoginReq {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getNewPwd() {
+		return newPwd;
+	}
+
+	public void setNewPwd(String newPwd) {
+		this.newPwd = newPwd;
+	}
 	
 	
 

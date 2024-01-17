@@ -27,5 +27,20 @@ public class UserServiceController {
 	public UserLoginRes create(@RequestBody UserLoginReq req) {
 		return userService.create(req.getAccount(),req.getPwd(),req.getEmail(),req.getPhone(),req.getName());
 	}
+	
+	@PostMapping(value = "movie/user/updatepwd")
+	public UserLoginRes updatepwd(@RequestBody UserLoginReq req) {
+		return userService.updatepwd(req.getAccount(),req.getPwd(),req.getNewPwd());
+	}
+	
+	@PostMapping(value = "movie/user/update")
+	public UserLoginRes update(@RequestBody UserLoginReq req) {
+		return userService.update(req.getAccount(),req.getPwd(),req.getEmail(),req.getPhone(),req.getName());
+	}
+	
+	@PostMapping(value = "movie/user/search")
+	public UserLoginRes search(@RequestBody UserLoginReq req) {
+		return userService.search(req.getAccount());
+	}
 
 }

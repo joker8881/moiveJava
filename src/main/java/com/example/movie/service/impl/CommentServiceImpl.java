@@ -48,15 +48,15 @@ public class CommentServiceImpl implements CommentService {
         if (!StringUtils.hasText(commentText)) {
             return new UserLoginRes(RtnCode.COMMENT_TEXT_IS_NONE.getCode(),RtnCode.COMMENT_TEXT_IS_NONE.getMessage());
         }
-        Optional<Comment> op = commentDao.findTopByMovieAndCommentIndexOrderByCommentIndexIndexDesc(movieID,commentIndex);
+        Optional<Comment> op = commentDao.findTopByMovieIDAndCommentIndexOrderByCommentIndexIndexDesc(movieID,commentIndex);
         Comment comment;
         
-        if(op.isPresent()) {
+        if(op.get().getCommentIndexIndex() != 0) {
         	comment = op.get();
         	int newCommentIndexOrder = comment.getCommentIndexIndex() + 1;
-        	commentDao.save(new Comment(movie, commentIndex, newCommentIndexOrder, commentText,account));
+        	commentDao.save(new Comment(movie,movieID, commentIndex, newCommentIndexOrder, commentText,account));
         } else {
-        	commentDao.save(new Comment(movie, commentIndex, 1 , commentText,account));
+        	commentDao.save(new Comment(movie,movieID, commentIndex, 1 , commentText,account));
         }
 
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());

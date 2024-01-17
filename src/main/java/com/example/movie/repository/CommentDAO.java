@@ -20,7 +20,7 @@ public interface CommentDAO extends JpaRepository<Comment, String>{
 	
 	public Optional<Comment> findTopByMovieIDOrderByCommentIndexDesc(int movieID);
 	
-	public Optional<Comment> findTopByMovieAndCommentIndexOrderByCommentIndexIndexDesc(int movieID, int commentIndex);
+	public Optional<Comment> findTopByMovieIDAndCommentIndexOrderByCommentIndexIndexDesc(int movieID, int commentIndex);
 	
 	public List<Comment> findAllByMovieID(int movieID);
 	

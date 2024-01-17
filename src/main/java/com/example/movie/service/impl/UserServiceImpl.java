@@ -101,6 +101,18 @@ public class UserServiceImpl implements UserService {
         }
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
+	
+	@Override
+	public UserLoginRes search(String account) {
+        if (!StringUtils.hasText(account)) {
+            return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+        }
+        boolean op = userDao.findAllByAccount(account);
+        if (op) {
+            return new UserLoginRes(RtnCode.ACCOUNT_EXISTED.getCode(),RtnCode.ACCOUNT_EXISTED.getMessage());
+        }
+        return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
 
 
 }

@@ -11,5 +11,7 @@ public interface UserService {
 	public UserLoginRes updatepwd(String account,String pwd,String newPwd);
 	
 	public UserLoginRes update(String account,String pwd,String email,int phone, String name);
+	
+	public UserLoginRes search(String account);
 
 }
