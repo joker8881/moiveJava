@@ -23,17 +23,17 @@ public class ArtworkServiceImpl implements ArtworkService {
     private ArtworkDAO artworkDao;
 
     @Override
-    public UserLoginRes create(String movie,String account,String artname,String artDescription) {
+    public UserLoginRes create(String movie,int movieId,String account,String artname,String artLocation) {
         if (!StringUtils.hasText(movie) || !StringUtils.hasText(account) || !StringUtils.hasText(artname) ||
-        		!StringUtils.hasText(artDescription)) {
+        		!StringUtils.hasText(artLocation)) {
             return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
-        artworkDao.save(new Artwork(movie, account, artname, artDescription));
+        artworkDao.save(new Artwork(movie,movieId, account, artname, artLocation));
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
 
 	@Override
-	public UserLoginRes update(int artorder,String artname,String artDescription) {
+	public UserLoginRes update(int artorder,String artname,String artLocation) {
 		Optional<Artwork> op = artworkDao.findByArtOrder(artorder);
 		if (op.isEmpty()){
 			return new UserLoginRes(RtnCode.ART_IS_NOT_FOUND.getCode(),RtnCode.ART_IS_NOT_FOUND.getMessage());
@@ -44,7 +44,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 		}
 		try {
 			comment.setArtName(artname);
-			comment.setArtDescription(artDescription);
+			comment.setArtLocation(artLocation);
 			artworkDao.save(comment);
 		} catch (Exception e) {
 			return new UserLoginRes(RtnCode.PAGE_CREATE_ERROR.getCode(), RtnCode.PAGE_CREATE_ERROR.getMessage());
@@ -64,11 +64,11 @@ public class ArtworkServiceImpl implements ArtworkService {
 	}
 
 	@Override
-	public UserLoginRes search(String movie,String artname) {
+	public UserLoginRes search(String movie,int movieId,String artname) {
 		movie = !StringUtils.hasText(movie) ? "" : movie;
 		artname = !StringUtils.hasText(artname) ? "" : artname;
 		List<Artwork> res = new ArrayList<>();
-			res = artworkDao.findByMovieContainingAndArtNameContaining(movie,artname);
+			res = artworkDao.findByMovieIdContainingAndArtNameContaining(movieId,artname);
 		if(res.isEmpty() || res==null) {
 			return new UserLoginRes(RtnCode.ART_IS_NOT_FOUND.getCode(), RtnCode.ART_IS_NOT_FOUND.getMessage());
 		}

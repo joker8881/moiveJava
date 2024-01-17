@@ -17,6 +17,9 @@ public class Artwork {
 	@Column(name = "art_order")
 	private int artOrder;
 	
+	@Column(name = "movie_id")
+	private int movieId;
+	
 	@Column(name = "movie")
 	private String movie;
 	
@@ -26,29 +29,31 @@ public class Artwork {
 	@Column(name = "art_name")
 	private String artName;
 	
-	@Column(name = "art_description")
-	private String artDescription;
+	@Column(name = "art_location")
+	private String artLocation;
 
 	public Artwork() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Artwork(int artOrder, String movie, String account, String artName, String artDescription) {
+	public Artwork(int artOrder, String movie, int movieId, String account, String artName, String artLocation) {
 		super();
 		this.artOrder = artOrder;
+		this.movieId = movieId;
 		this.movie = movie;
 		this.account = account;
 		this.artName = artName;
-		this.artDescription = artDescription;
+		this.artLocation = artLocation;
 	}
-	
-	public Artwork(String movie, String account, String artName, String artDescription) {
+
+	public Artwork(String movie,int movieId, String account, String artName, String artLocation) {
 		super();
+		this.movieId = movieId;
 		this.movie = movie;
 		this.account = account;
 		this.artName = artName;
-		this.artDescription = artDescription;
+		this.artLocation = artLocation;
 	}
 
 	public int getArtOrder() {
@@ -57,6 +62,14 @@ public class Artwork {
 
 	public void setArtOrder(int artOrder) {
 		this.artOrder = artOrder;
+	}
+
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
 
 	public String getMovie() {
@@ -83,12 +96,12 @@ public class Artwork {
 		this.artName = artName;
 	}
 
-	public String getArtDescription() {
-		return artDescription;
+	public String getArtLocation() {
+		return artLocation;
 	}
 
-	public void setArtDescription(String artDescription) {
-		this.artDescription = artDescription;
+	public void setArtLocation(String artLocation) {
+		this.artLocation = artLocation;
 	}
 	
 	

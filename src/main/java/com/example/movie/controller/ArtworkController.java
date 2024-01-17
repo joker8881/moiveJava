@@ -25,12 +25,12 @@ public class ArtworkController {
 
 	@PostMapping(value = "movie/art/create")
 	public UserLoginRes create(@RequestBody ArtworkReq req) {
-		return artworkService.create(req.getMovie(),req.getAccount(),req.getArtname(),req.getArtdescription());
+		return artworkService.create(req.getMovie(),req.getMovieId(),req.getAccount(),req.getArtname(),req.getArtlocation());
 	}
 	
 	@PostMapping(value = "movie/art/update")
 	public UserLoginRes update(@RequestBody ArtworkReq req) {
-				return artworkService.update(req.getArtorder(),req.getArtname(),req.getArtdescription());
+				return artworkService.update(req.getArtorder(),req.getArtname(),req.getArtlocation());
 	}
 	
 	@PostMapping(value = "movie/art/delete")
@@ -40,7 +40,7 @@ public class ArtworkController {
 	
 	@PostMapping(value = "movie/art/search")
 	public UserLoginRes search(@RequestBody ArtworkReq req) {
-				return artworkService.search(req.getMovie(),req.getArtname());
+				return artworkService.search(req.getMovie(),req.getMovieId(),req.getArtname());
 	}
 
 }

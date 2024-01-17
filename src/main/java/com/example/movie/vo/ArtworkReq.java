@@ -6,11 +6,13 @@ public class ArtworkReq {
 	
 	private String movie;
 	
+	private int movieId;
+	
 	private String account;
 	
 	private String artname;
 	
-	private String artdescription;
+	private String artlocation;
 
 	public String getMovie() {
 		return movie;
@@ -40,17 +42,27 @@ public class ArtworkReq {
 		return artname;
 	}
 
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
+	}
+
 	public void setArtname(String artname) {
 		this.artname = artname;
 	}
 
-	public String getArtdescription() {
-		return artdescription;
+	public String getArtlocation() {
+		return artlocation;
 	}
 
-	public void setArtdescription(String artdescription) {
-		this.artdescription = artdescription;
+	public void setArtlocation(String artlocation) {
+		this.artlocation = artlocation;
 	}
+	
+	
 	
 	
 	

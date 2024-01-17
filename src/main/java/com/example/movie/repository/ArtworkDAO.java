@@ -13,7 +13,7 @@ import com.example.movie.entity.Artwork;
 @Repository
 public interface ArtworkDAO extends JpaRepository<Artwork, String>{
 	
-    public List<Artwork> findByMovieContainingAndArtNameContaining(String movie, String artname);
+    public List<Artwork> findByMovieIdContainingAndArtNameContaining(int movieId, String artname);
     
     public Optional<Artwork> findByArtOrder(int artorder);
     
