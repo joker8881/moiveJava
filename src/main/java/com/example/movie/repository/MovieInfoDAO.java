@@ -24,8 +24,8 @@ public interface MovieInfoDAO extends JpaRepository<MovieInfo, Integer>{
 	
 	public Optional<MovieInfo> findAllByMovieId(int movieId);
 	
-	public List<MovieInfo> findByMovieIdContainingAndCinemaContainingAndOnDateGreaterThanEqualAndOnDateLessThanEqual(
-			int movieId, String cinema, LocalDate startDate, LocalDate endDate);
+	public List<MovieInfo> findByMovieIdContainingAndCinemaContainingAndOnDateBetween(
+			String movieId, String cinema, LocalDate startDate, LocalDate endDate);
 	
 	@Transactional
 	@Modifying

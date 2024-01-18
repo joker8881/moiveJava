@@ -23,9 +23,9 @@ public class MovieInfoServiceImpl implements MovieInfoService {
     private MovieInfoDAO movieInfoDao;
 
     @Override
-    public UserLoginRes create(int movieId,String movie, String cinema, String area, int price,
+    public UserLoginRes create(String movieId,String movie, String cinema, String area, int price,
 			LocalDate onDate, String time) {
-        if (movieId==0) {
+        if (!StringUtils.hasText(movieId)) {
             return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
         }
         if (!StringUtils.hasText(movie)) {
@@ -53,7 +53,7 @@ public class MovieInfoServiceImpl implements MovieInfoService {
     }
     
 	@Override
-	public UserLoginRes update(int number,int movieId,String movie, String cinema, String area, int price,
+	public UserLoginRes update(int number,String movieId,String movie, String cinema, String area, int price,
 			LocalDate onDate, String time) {
         if (!StringUtils.hasText(movie)) {
             return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
@@ -102,15 +102,16 @@ public class MovieInfoServiceImpl implements MovieInfoService {
 	}
 
 	@Override
-	public UserLoginRes search(int movieId,String movie, String cinema, String area, 
+	public UserLoginRes search(String movieId,String movie, String cinema, String area, 
 			LocalDate startDate, LocalDate endDate) {
+		movieId = !StringUtils.hasText(movieId) ? "" : movieId;
 		movie = !StringUtils.hasText(movie) ? "" : movie;
 		cinema = !StringUtils.hasText(cinema) ? "" : cinema;
 		area = !StringUtils.hasText(area) ? "" : area;
 		startDate = startDate== null ? LocalDate.of(1970,01,01) : startDate;
 		endDate = endDate == null ? LocalDate.of(2099,12,31) : endDate;
 		List<MovieInfo> res = new ArrayList<>();
-			res = movieInfoDao.findByMovieIdContainingAndCinemaContainingAndOnDateGreaterThanEqualAndOnDateLessThanEqual(movieId,cinema,startDate,endDate);
+			res = movieInfoDao.findByMovieIdContainingAndCinemaContainingAndOnDateBetween(movieId,cinema,startDate,endDate);
 				return new MovieInfoGetRes(RtnCode.SUCCESSFUL.getCode(),
 						RtnCode.SUCCESSFUL.getMessage(),res);
 
