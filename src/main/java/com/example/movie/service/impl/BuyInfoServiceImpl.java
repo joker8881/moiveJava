@@ -56,7 +56,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         }
         seat = seat.replace(" ", "").replace("[", "").replace("]", "");
         List<String> seatOrderList = new ArrayList<>(Arrays.asList(seat.split(",")));
-        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieAndCinemaAndArea(movie, cinema, area);
+        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieIdAndCinemaAndArea(movieId, cinema, area);
         for(String item : seatOrderList) {
             for(BuyInfo seatItem : buyInfoList) {
     			if (seatItem.getSeat().contains(item)) {
@@ -79,7 +79,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         }
         seat = seat.replace(" ", "").replace("[", "").replace("]", "");
         List<String> seatOrderList = new ArrayList<>(Arrays.asList(seat.split(",")));
-        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieAndCinemaAndArea(movie, cinema, area);
+        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieIdAndCinemaAndArea(movieId, cinema, area);
         for(String item : seatOrderList) {
             for(BuyInfo seatItem : buyInfoList) {
     			if (seatItem.getSeat().contains(item)) {
