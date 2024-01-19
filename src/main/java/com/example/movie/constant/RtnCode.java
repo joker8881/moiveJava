@@ -27,7 +27,10 @@ public enum RtnCode {
 	CHECK_SEAT_INPUT(400,"Check seat input"),
 	DUPLICATE_SEAT(400,"Duplicate seat!"),
 	MOVIE_INFO_SAVE_ERROR(400,"Movie info save error"),
-	ACCOUNT_EXISTED(400,"Account existed!");
+	ACCOUNT_EXISTED(400,"Account existed!"),
+	ACCOUNT_ALREADY_VERIFIED(400,"Account aleardy verified"),
+	ACCOUNT_NOT_VERIFY(400,"Account not verify"),
+	VERIFICATION_CODE_INCORRECT(400,"Code incorrect");
 	
 	private int code;
 	

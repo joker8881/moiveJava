@@ -17,6 +17,16 @@ public class UserLoginReq {
 	private String email;
 	
 	private int phone;
+	
+	String verificationCode;
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
 
 	public String getAccount() {
 		return account;

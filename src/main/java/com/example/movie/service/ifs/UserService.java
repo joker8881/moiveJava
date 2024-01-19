@@ -13,5 +13,9 @@ public interface UserService {
 	public UserLoginRes update(String account,String pwd,String email,int phone, String name);
 	
 	public UserLoginRes search(String account);
+	
+	public UserLoginRes verifyAccount(String account, String verificationCode);
+	
+	void sendVerificationEmail(String userEmail, String verificationCode);
 
 }

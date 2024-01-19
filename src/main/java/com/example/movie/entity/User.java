@@ -26,19 +26,27 @@ public class User {
 	
 	@Column(name = "phone")
 	private int phone;
+	
+	@Column(name = "verify")
+	private boolean verify;
+	
+	@Column(name = "verify_code")
+	private String verifyCode;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String account, String pwd, String email, int phone) {
+	public User(String name, String account, String pwd, String email, int phone, boolean verify, String verifyCode) {
 		super();
 		this.name = name;
 		this.account = account;
 		this.pwd = pwd;
 		this.email = email;
 		this.phone = phone;
+		this.verify = verify;
+		this.verifyCode = verifyCode;
 	}
 
 	public String getName() {
@@ -81,6 +89,22 @@ public class User {
 		this.phone = phone;
 	}
 
+	public boolean isVerify() {
+		return verify;
+	}
 
+	public void setVerify(boolean verify) {
+		this.verify = verify;
+	}
+
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
+	
+	
 
 }

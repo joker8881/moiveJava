@@ -42,5 +42,10 @@ public class UserServiceController {
 	public UserLoginRes search(@RequestBody UserLoginReq req) {
 		return userService.search(req.getAccount());
 	}
+	
+	@PostMapping(value = "movie/user/verifyAccount")
+	public UserLoginRes verifyAccount(@RequestBody UserLoginReq req) {
+		return userService.verifyAccount(req.getAccount(),req.getVerificationCode());
+	}
 
 }
