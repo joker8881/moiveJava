@@ -156,11 +156,8 @@ public class BuyInfoServiceImpl implements BuyInfoService {
 	}
 	
 	@Override
-	public UserLoginRes searchseat(int movieId,String movie,String cinema,String area) {
+	public UserLoginRes searchseat(int movieId,String cinema,String area,LocalDate onDate,String time) {
         if (movieId ==0) {
-            return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
-        }
-        if (!StringUtils.hasText(movie)) {
             return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
         }
         if (!StringUtils.hasText(cinema)) {
@@ -170,7 +167,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
             return new UserLoginRes(RtnCode.CHECK_AREA_INPUT.getCode(),RtnCode.CHECK_AREA_INPUT.getMessage());
         }
 		List<BuyInfo> res = new ArrayList<>();
-		res = buyInfoDao.findAllByMovieIdAndCinemaAndArea(movieId,cinema,area);
+		res = buyInfoDao.findAllByMovieIdAndCinemaAndAreaAndOnDateAndTime(movieId,cinema,area,onDate,time);
 		return new BuyInfoGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
 	}
 

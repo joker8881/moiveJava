@@ -17,7 +17,7 @@ public interface BuyInfoService {
 	
 	public UserLoginRes search(String account);
 	
-	public UserLoginRes searchseat(int movieId,String movie,String cinema,String area);
+	public UserLoginRes searchseat(int movieId,String cinema,String area,LocalDate onDate,String time);
 	
 //	public UserLoginRes search(String movie, String cinema, String area, 
 //			LocalDate startDate, LocalDate endDate);

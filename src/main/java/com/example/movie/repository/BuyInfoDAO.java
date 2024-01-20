@@ -26,7 +26,7 @@ public interface BuyInfoDAO extends JpaRepository<BuyInfo, Integer>{
 	
 	public List<BuyInfo> findByAccount(String account);
 	
-	public List<BuyInfo> findAllByMovieIdAndCinemaAndArea(int movieId,String cinema,String area);
+	public List<BuyInfo> findAllByMovieIdAndCinemaAndAreaAndOnDateAndTime(int movieId,String cinema,String area,LocalDate onDate,String time);
 	
 //	public List<BuyInfo> findBySeatIn(String seat);
 	

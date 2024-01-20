@@ -44,7 +44,7 @@ public class BuyInfoController {
 	
 	@PostMapping(value = "movie/buyinfo/searchseat")
 	public UserLoginRes searchseat(@RequestBody BuyInfoReq req) {
-				return buyInfoService.searchseat(req.getMovieId(),req.getMovie(),req.getCinema(),req.getArea());
+				return buyInfoService.searchseat(req.getMovieId(),req.getCinema(),req.getArea(),req.getOnDate(),req.getOnTime());
 	}
 
 }
