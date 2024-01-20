@@ -16,6 +16,8 @@ public interface CommentDAO extends JpaRepository<Comment, String>{
 	@Transactional
 	public int deleteByCommentIndexAndCommentIndexIndexAndMovieID(int commentIndex,int commentIndexIndex, int movieID);
 	
+	public int deleteByCommentIndexAndMovieID(int commentIndex, int movieID);
+	
 	public Optional<Comment> findByCommentIndexAndCommentIndexIndexAndMovieID(int commentIndex,int commentIndexIndex, int movieID);
 	
 	public Optional<Comment> findTopByMovieIDOrderByCommentIndexDesc(int movieID);

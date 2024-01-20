@@ -10,7 +10,9 @@ public interface CommentService {
 
 	public UserLoginRes update(int commentIndex,int commentIndexOrder,String movie,int movieID,String commentText,String account);
 	
-	public UserLoginRes delete(int commentIndex,int commentIndexOrder,int movieID);
+	public UserLoginRes deleteF(int commentIndex,int movieID);
+	
+	public UserLoginRes deleteC(int commentIndex,int commentIndexOrder,int movieID);
 	
 	public UserLoginRes likeAndDislike(int commentIndex,int commentIndexOrder,int movieID,int like,int dislike);
 	

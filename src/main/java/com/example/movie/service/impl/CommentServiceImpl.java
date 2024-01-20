@@ -89,7 +89,18 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public UserLoginRes delete(int commentIndex,int commentIndexOrder,int movieID) {
+	public UserLoginRes deleteF(int commentIndex,int movieID) {
+		int res = commentDao.deleteByCommentIndexAndMovieID(commentIndex,movieID);
+		if(res == 0) {
+			return new UserLoginRes(RtnCode.COMMENT_IS_NOT_EXSISTED.getCode(), RtnCode.COMMENT_IS_NOT_EXSISTED.getMessage());
+		}else {
+			return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+		}
+		
+	}
+	
+	@Override
+	public UserLoginRes deleteC(int commentIndex,int commentIndexOrder,int movieID) {
 		int res = commentDao.deleteByCommentIndexAndCommentIndexIndexAndMovieID(commentIndex,commentIndexOrder,movieID);
 		if(res == 0) {
 			return new UserLoginRes(RtnCode.COMMENT_IS_NOT_EXSISTED.getCode(), RtnCode.COMMENT_IS_NOT_EXSISTED.getMessage());

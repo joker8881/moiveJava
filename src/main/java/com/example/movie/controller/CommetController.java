@@ -36,9 +36,14 @@ public class CommetController {
 				return commentService.update(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovie(),req.getMovieID(),req.getCommentText(),req.getAccount());
 	}
 	
-	@PostMapping(value = "movie/comment/delete")
-	public UserLoginRes delete(@RequestBody CommentReq req) {
-		return commentService.delete(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovieID());
+	@PostMapping(value = "movie/comment/deleteF")
+	public UserLoginRes deleteF(@RequestBody CommentReq req) {
+		return commentService.deleteF(req.getCommentIndex(),req.getMovieID());
+	}
+	
+	@PostMapping(value = "movie/comment/deleteC")
+	public UserLoginRes deleteC(@RequestBody CommentReq req) {
+		return commentService.deleteC(req.getCommentIndex(),req.getCommentIndexOrder(),req.getMovieID());
 	}
 	
 	@PostMapping(value = "movie/comment/likeAndDislike")
