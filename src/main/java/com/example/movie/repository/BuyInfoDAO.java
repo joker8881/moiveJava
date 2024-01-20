@@ -26,12 +26,12 @@ public interface BuyInfoDAO extends JpaRepository<BuyInfo, Integer>{
 	
 	public List<BuyInfo> findByAccount(String account);
 	
-	public List<BuyInfo> findAllByMovieIdAndCinemaAndAreaAndOnDateAndTime(int movieId,String cinema,String area,LocalDate onDate,String time);
+	public List<BuyInfo> findAllByMovieIdAndCinemaAndAreaAndOnDateAndOnTime(int movieId,String cinema,String area,LocalDate onDate,String onTime);
 	
 //	public List<BuyInfo> findBySeatIn(String seat);
 	
-	@Query("select new BuyInfo(seat) from BuyInfo where movieId = ?1 and cinema = ?2 and area = ?3 ")
-	public List<BuyInfo> findSeatByMovieIdAndCinemaAndArea(int movieId,String cinema,String area);
+	@Query("select new BuyInfo(seat) from BuyInfo where movieId = ?1 and cinema = ?2 and area = ?3 and onDate = ?4 and onTime = ?5")
+	public List<BuyInfo> findSeatByMovieIdAndCinemaAndAreaAndOnDateAndOntime(int movieId,String cinema,String area,LocalDate onDate,String onTime);
 	
 //	public boolean existsByMovieAndCinemaAndAreaAndSeatContaining(String movie,String cinema,String area,String seat);
 	

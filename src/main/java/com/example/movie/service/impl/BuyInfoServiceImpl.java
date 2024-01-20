@@ -56,7 +56,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         }
         seat = seat.replace(" ", "").replace("[", "").replace("]", "");
         List<String> seatOrderList = new ArrayList<>(Arrays.asList(seat.split(",")));
-        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieIdAndCinemaAndArea(movieId, cinema, area);
+        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieIdAndCinemaAndAreaAndOnDateAndOntime(movieId, cinema, area,onDate,time);
         for(String item : seatOrderList) {
             for(BuyInfo seatItem : buyInfoList) {
     			if (seatItem.getSeat().contains(item)) {
@@ -79,7 +79,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         }
         seat = seat.replace(" ", "").replace("[", "").replace("]", "");
         List<String> seatOrderList = new ArrayList<>(Arrays.asList(seat.split(",")));
-        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieIdAndCinemaAndArea(movieId, cinema, area);
+        List<BuyInfo> buyInfoList = buyInfoDao.findSeatByMovieIdAndCinemaAndAreaAndOnDateAndOntime(movieId, cinema, area,onDate,time);
         for(String item : seatOrderList) {
             for(BuyInfo seatItem : buyInfoList) {
     			if (seatItem.getSeat().contains(item)) {
@@ -118,7 +118,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         if (onDate==null) {
             return new UserLoginRes(RtnCode.CHECK_ONDATE_INPUT.getCode(),RtnCode.CHECK_ONDATE_INPUT.getMessage());
         } else {
-        	buyinfo.setDate(onDate);
+        	buyinfo.setOnDate(onDate);
         }
         if (!StringUtils.hasText(time)) {
             return new UserLoginRes(RtnCode.CHECK_ONTIME_INPUT.getCode(),RtnCode.CHECK_ONTIME_INPUT.getMessage());
@@ -167,7 +167,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
             return new UserLoginRes(RtnCode.CHECK_AREA_INPUT.getCode(),RtnCode.CHECK_AREA_INPUT.getMessage());
         }
 		List<BuyInfo> res = new ArrayList<>();
-		res = buyInfoDao.findAllByMovieIdAndCinemaAndAreaAndOnDateAndTime(movieId,cinema,area,onDate,time);
+		res = buyInfoDao.findAllByMovieIdAndCinemaAndAreaAndOnDateAndOnTime(movieId,cinema,area,onDate,time);
 		return new BuyInfoGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
 	}
 

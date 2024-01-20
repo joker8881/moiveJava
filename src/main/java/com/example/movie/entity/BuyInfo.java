@@ -35,7 +35,7 @@ public class BuyInfo {
 	private int price;
 	
 	@Column(name = "on_date")
-	private LocalDate date;
+	private LocalDate onDate;
 	
 	@Column(name = "on_time")
 	private String onTime;
@@ -65,7 +65,7 @@ public class BuyInfo {
 
 
 
-	public BuyInfo(int number, String account, String movie,int movieId, String cinema, String area, int price, LocalDate date,
+	public BuyInfo(int number, String account, String movie,int movieId, String cinema, String area, int price, LocalDate onDate,
 			String onTime, String seat) {
 		super();
 		this.number = number;
@@ -75,12 +75,12 @@ public class BuyInfo {
 		this.cinema = cinema;
 		this.area = area;
 		this.price = price;
-		this.date = date;
+		this.onDate = onDate;
 		this.onTime = onTime;
 		this.seat = seat;
 	}
 	
-	public BuyInfo(String account, String movie,int movieId, String cinema, String area, int price, LocalDate date,
+	public BuyInfo(String account, String movie,int movieId, String cinema, String area, int price, LocalDate onDate,
 			String onTime, String seat) {
 		super();
 		this.account = account;
@@ -89,7 +89,7 @@ public class BuyInfo {
 		this.cinema = cinema;
 		this.area = area;
 		this.price = price;
-		this.date = date;
+		this.onDate = onDate;
 		this.onTime = onTime;
 		this.seat = seat;
 	}
@@ -142,12 +142,12 @@ public class BuyInfo {
 		this.price = price;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDate getOnDate() {
+		return onDate;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setOnDate(LocalDate onDate) {
+		this.onDate = onDate;
 	}
 
 	public String getOnTime() {
