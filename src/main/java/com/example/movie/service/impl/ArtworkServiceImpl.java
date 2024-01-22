@@ -23,7 +23,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     private ArtworkDAO artworkDao;
 
     @Override
-    public UserLoginRes create(String movie,int movieId,String account,String artname,String artLocation) {
+    public UserLoginRes create(String movie,String movieId,String account,String artname,String artLocation) {
         if (!StringUtils.hasText(movie) || !StringUtils.hasText(account) || !StringUtils.hasText(artname) ||
         		!StringUtils.hasText(artLocation)) {
             return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
@@ -64,7 +64,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 	}
 
 	@Override
-	public UserLoginRes search(String movie,int movieId,String artname) {
+	public UserLoginRes search(String movie,String movieId,String artname) {
 		movie = !StringUtils.hasText(movie) ? "" : movie;
 		artname = !StringUtils.hasText(artname) ? "" : artname;
 		List<Artwork> res = new ArrayList<>();

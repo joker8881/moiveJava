@@ -1,5 +1,6 @@
 package com.example.movie.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +22,18 @@ public class MypageServiceImpl implements MypageService {
     private MypageDAO mypageDao;
 
     @Override
-    public UserLoginRes create(String account,String favorit,String watchList, String accountMovieList) {
+    public UserLoginRes create(String account,String favorit,String watchList, String accountMovieList,String favoritComment) {
         if (!StringUtils.hasText(account)) {
             return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
 
-        mypageDao.save(new Mypage(account, favorit, watchList, accountMovieList));
+        mypageDao.save(new Mypage(account, favorit, watchList, accountMovieList,favoritComment));
 
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
 
 	@Override
-	public UserLoginRes update(String account,String favorit,String watchList, String accountMovieList) {
+	public UserLoginRes update(String account,String favorit,String watchList, String accountMovieList,String favoritComment) {
 		Optional<Mypage> op = mypageDao.findById(account);
 		if (op.isEmpty()){
 			return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
@@ -47,6 +48,9 @@ public class MypageServiceImpl implements MypageService {
 		if (StringUtils.hasText(accountMovieList)){
 			mypage.setAccountMovieList(accountMovieList);
 		}
+		if (StringUtils.hasText(favoritComment)){
+			mypage.setFavoritComment(favoritComment);
+		}
 		try {
 			mypageDao.save(mypage);
 		} catch (Exception e) {
@@ -59,7 +63,17 @@ public class MypageServiceImpl implements MypageService {
 	public UserLoginRes search(String account) {
 		Optional<Mypage> op = mypageDao.findById(account);
 		if(op.isEmpty()) {
-			return new UserLoginRes(RtnCode.PAGE_CREATE_ERROR.getCode(), RtnCode.PAGE_CREATE_ERROR.getMessage());
+			return new UserLoginRes(RtnCode.PAGE_NOT_FOUND.getCode(), RtnCode.PAGE_NOT_FOUND.getMessage());
+		}
+		return new MypageGetRes(RtnCode.SUCCESSFUL.getCode(),
+				RtnCode.SUCCESSFUL.getMessage(),op);
+	}
+
+	@Override
+	public UserLoginRes searchALL() {
+		List<Mypage> op = mypageDao.findAll();
+		if(op.isEmpty()) {
+			return new UserLoginRes(RtnCode.PAGE_NOT_FOUND.getCode(), RtnCode.PAGE_NOT_FOUND.getMessage());
 		}
 		return new MypageGetRes(RtnCode.SUCCESSFUL.getCode(),
 				RtnCode.SUCCESSFUL.getMessage(),op);

@@ -18,7 +18,7 @@ public class Artwork {
 	private int artOrder;
 	
 	@Column(name = "movie_id")
-	private int movieId;
+	private String movieId;
 	
 	@Column(name = "movie")
 	private String movie;
@@ -37,7 +37,7 @@ public class Artwork {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Artwork(int artOrder, String movie, int movieId, String account, String artName, String artLocation) {
+	public Artwork(int artOrder, String movie, String movieId, String account, String artName, String artLocation) {
 		super();
 		this.artOrder = artOrder;
 		this.movieId = movieId;
@@ -47,7 +47,7 @@ public class Artwork {
 		this.artLocation = artLocation;
 	}
 
-	public Artwork(String movie,int movieId, String account, String artName, String artLocation) {
+	public Artwork(String movie,String movieId, String account, String artName, String artLocation) {
 		super();
 		this.movieId = movieId;
 		this.movie = movie;
@@ -64,11 +64,11 @@ public class Artwork {
 		this.artOrder = artOrder;
 	}
 
-	public int getMovieId() {
+	public String getMovieId() {
 		return movieId;
 	}
 
-	public void setMovieId(int movieId) {
+	public void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
 

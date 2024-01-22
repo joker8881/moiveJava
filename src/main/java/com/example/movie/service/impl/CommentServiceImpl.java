@@ -90,7 +90,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public UserLoginRes deleteF(int commentIndex,int movieID) {
-		int res = commentDao.deleteByCommentIndexAndMovieID(commentIndex,movieID);
+		int res = commentDao.deleteAllByCommentIndexAndMovieID(commentIndex,movieID);
 		if(res == 0) {
 			return new UserLoginRes(RtnCode.COMMENT_IS_NOT_EXSISTED.getCode(), RtnCode.COMMENT_IS_NOT_EXSISTED.getMessage());
 		}else {

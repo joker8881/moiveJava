@@ -21,18 +21,22 @@ public class Mypage {
 	
 	@Column(name = "account_movie_list")
 	private String accountMovieList;
+	
+	@Column(name = "favorit_comment")
+	private String favoritComment;
 
 	public Mypage() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Mypage(String account, String favorit, String watchList, String accountMovieList) {
+	public Mypage(String account, String favorit, String watchList, String accountMovieList,String favoritComment) {
 		super();
 		this.account = account;
 		this.favorit = favorit;
 		this.watchList = watchList;
 		this.accountMovieList = accountMovieList;
+		this.favoritComment = favoritComment;
 	}
 
 	public String getAccount() {
@@ -65,6 +69,14 @@ public class Mypage {
 
 	public void setAccountMovieList(String accountMovieList) {
 		this.accountMovieList = accountMovieList;
+	}
+
+	public String getFavoritComment() {
+		return favoritComment;
+	}
+
+	public void setFavoritComment(String favoritComment) {
+		this.favoritComment = favoritComment;
 	}
 	
 	

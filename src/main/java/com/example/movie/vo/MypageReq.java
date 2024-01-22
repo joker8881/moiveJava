@@ -9,6 +9,8 @@ public class MypageReq {
 	private String watchList;
 	
 	private String accountMovieList;
+	
+	private String favoritComment;
 
 	public String getAccount() {
 		return account;
@@ -40,6 +42,14 @@ public class MypageReq {
 
 	public void setAccountMovieList(String accountMovieList) {
 		this.accountMovieList = accountMovieList;
+	}
+
+	public String getFavoritComment() {
+		return favoritComment;
+	}
+
+	public void setFavoritComment(String favoritComment) {
+		this.favoritComment = favoritComment;
 	}
 
 	

@@ -6,7 +6,7 @@ public class ArtworkReq {
 	
 	private String movie;
 	
-	private int movieId;
+	private String movieId;
 	
 	private String account;
 	
@@ -42,11 +42,11 @@ public class ArtworkReq {
 		return artname;
 	}
 
-	public int getMovieId() {
+	public String getMovieId() {
 		return movieId;
 	}
 
-	public void setMovieId(int movieId) {
+	public void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
 
