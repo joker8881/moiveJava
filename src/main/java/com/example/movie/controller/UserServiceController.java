@@ -23,9 +23,19 @@ public class UserServiceController {
 		return userService.login(req.getAccount(),req.getPwd());
 	}
 	
+	@PostMapping(value = "/movie/user/loginCheck")
+	public UserLoginRes logincheck(@RequestBody UserLoginReq req) {
+		return userService.logincheck(req.getAccount());
+	}
+	
 	@PostMapping(value = "movie/user/create")
 	public UserLoginRes create(@RequestBody UserLoginReq req) {
 		return userService.create(req.getAccount(),req.getPwd(),req.getEmail(),req.getPhone(),req.getName());
+	}
+	
+	@PostMapping(value = "movie/user/createAdmi")
+	public UserLoginRes createAdmi(@RequestBody UserLoginReq req) {
+		return userService.createAdmi(req.getAccount(),req.getPwd(),req.getEmail(),req.getPhone(),req.getName());
 	}
 	
 	@PostMapping(value = "movie/user/updatepwd")
@@ -46,6 +56,16 @@ public class UserServiceController {
 	@PostMapping(value = "movie/user/verifyAccount")
 	public UserLoginRes verifyAccount(@RequestBody UserLoginReq req) {
 		return userService.verifyAccount(req.getAccount(),req.getVerificationCode());
+	}
+	
+	@PostMapping(value = "movie/user/forgetpwd")
+	public UserLoginRes fogetpwd(@RequestBody UserLoginReq req) {
+		return userService.fogetpwd(req.getEmail());
+	}
+	
+	@PostMapping(value = "movie/user/verifypwdAccount")
+	public UserLoginRes verifyforgetAccount(@RequestBody UserLoginReq req) {
+		return userService.verifyforgetAccount(req.getAccount(),req.getNewPwd(),req.getVerificationCode());
 	}
 
 }

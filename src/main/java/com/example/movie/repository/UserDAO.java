@@ -17,4 +17,6 @@ public interface UserDAO extends JpaRepository<User, String>{
 	public boolean findAllByAccount(String account);
 	
 	public Optional<User> findByAccount(String account);
+	
+	public Optional<User> findAllByEmail(String email);
 }

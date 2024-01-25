@@ -2,6 +2,7 @@ package com.example.movie.constant;
 
 public enum RtnCode {
 	SUCCESSFUL(200,"Successful!"),//
+	SUCCESSFUL_ADMIN_LOGIN(201,"Successful Admin login!"),
 	PARAM_ERROR(400,"Param error!"),//
 	ACCOUNT_NOT_FOUND(404,"Account not found!"),
 	PASSWORD_NOT_FIT(400,"password not fit!"),

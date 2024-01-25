@@ -170,5 +170,14 @@ public class BuyInfoServiceImpl implements BuyInfoService {
 		res = buyInfoDao.findAllByMovieIdAndCinemaAndAreaAndOnDateAndOnTime(movieId,cinema,area,onDate,time);
 		return new BuyInfoGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
 	}
+	
+	@Override
+	public UserLoginRes searchP(int movieId,String cinema) {
+        if (movieId ==0) {
+            return new UserLoginRes(RtnCode.CHECK_MOVIE_INPUT.getCode(),RtnCode.CHECK_MOVIE_INPUT.getMessage());
+        }
+        Integer res = buyInfoDao.movieprofit(movieId,cinema);
+		return new BuyInfoGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
+	}
 
 }
