@@ -28,6 +28,8 @@ public class BuyInfoReq {
 	private String onTime;
 	
 	private String seat;
+	
+	private boolean confirmpay;
 
 	public int getNumber() {
 		return number;
@@ -116,6 +118,14 @@ public class BuyInfoReq {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public boolean isConfirmpay() {
+		return confirmpay;
+	}
+
+	public void setConfirmpay(boolean confirmpay) {
+		this.confirmpay = confirmpay;
 	}
 	
 	

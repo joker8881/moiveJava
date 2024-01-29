@@ -8,10 +8,12 @@ import com.example.movie.vo.UserLoginRes;
 public interface BuyInfoService {
 	
 	public UserLoginRes create(String mail,String account, String movie,int movieId, String cinema, String area, int price,
-			LocalDate onDate, String time, String seat);
+			LocalDate onDate, String time, String seat,boolean confirmpay);
 
 	public UserLoginRes update(int number, String account, String movie,int movieId, String cinema, String area, int price,
-			LocalDate onDate, String time, String seat);
+			LocalDate onDate, String time, String seat,boolean confirmpay);
+	
+	public UserLoginRes paycheck(int number);
 	
 	public UserLoginRes delete(int number);
 	

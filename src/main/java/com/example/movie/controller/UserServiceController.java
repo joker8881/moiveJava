@@ -25,7 +25,8 @@ public class UserServiceController {
 	
 	@PostMapping(value = "/movie/user/loginCheck")
 	public UserLoginRes logincheck(@RequestBody UserLoginReq req) {
-		return userService.logincheck(req.getAccount());
+		UserLoginRes res = userService.logincheck(req.getAccount());
+		return res;
 	}
 	
 	@PostMapping(value = "movie/user/create")

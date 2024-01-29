@@ -42,6 +42,9 @@ public class BuyInfo {
 	
 	@Column(name = "seat")
 	private String seat;
+	
+	@Column(name = "confirmpay")
+	private boolean confirmpay;
 
 	public BuyInfo() {
 		super();
@@ -66,7 +69,7 @@ public class BuyInfo {
 
 
 	public BuyInfo(int number, String account, String movie,int movieId, String cinema, String area, int price, LocalDate onDate,
-			String onTime, String seat) {
+			String onTime, String seat,boolean confirmpay) {
 		super();
 		this.number = number;
 		this.account = account;
@@ -78,10 +81,11 @@ public class BuyInfo {
 		this.onDate = onDate;
 		this.onTime = onTime;
 		this.seat = seat;
+		this.confirmpay = confirmpay;
 	}
 	
 	public BuyInfo(String account, String movie,int movieId, String cinema, String area, int price, LocalDate onDate,
-			String onTime, String seat) {
+			String onTime, String seat,boolean confirmpay) {
 		super();
 		this.account = account;
 		this.movie = movie;
@@ -92,6 +96,7 @@ public class BuyInfo {
 		this.onDate = onDate;
 		this.onTime = onTime;
 		this.seat = seat;
+		this.confirmpay = confirmpay;
 	}
 
 	public int getNumber() {
@@ -176,6 +181,18 @@ public class BuyInfo {
 
 	public void setMovieId(int movieId) {
 		this.movieId = movieId;
+	}
+
+
+
+	public boolean isConfirmpay() {
+		return confirmpay;
+	}
+
+
+
+	public void setConfirmpay(boolean confirmpay) {
+		this.confirmpay = confirmpay;
 	}
 
 	

@@ -38,7 +38,7 @@ public class BuyInfoServiceImpl implements BuyInfoService {
 
     @Override
     public UserLoginRes create(String email,String account, String movie,int movieId, String cinema, String area, int price,
-			LocalDate onDate, String time, String seat) {
+			LocalDate onDate, String time, String seat,boolean confirmpay) {
         if (!StringUtils.hasText(account)) {
             return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
@@ -78,14 +78,14 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         
         sendBuyEmail(email,account,movie,cinema,area,price,onDate,time,seat,buyCode);
 
-        buyInfoDao.save(new BuyInfo(account,movie,movieId,cinema,area,price,onDate,time,seat));
+        buyInfoDao.save(new BuyInfo(account,movie,movieId,cinema,area,price,onDate,time,seat,false));
         
         return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
     }
     
 	@Override
 	public UserLoginRes update(int number, String account, String movie,int movieId, String cinema, String area, int price,
-			LocalDate onDate, String time, String seat) {
+			LocalDate onDate, String time, String seat,boolean confirmpay) {
         if (!StringUtils.hasText(seat)) {
             return new UserLoginRes(RtnCode.CHECK_SEAT_INPUT.getCode(),RtnCode.CHECK_SEAT_INPUT.getMessage());
         }
@@ -137,6 +137,9 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         } else {
 			buyinfo.setOnTime(time);
         }
+        if (buyinfo.isConfirmpay() == false) {
+        	buyinfo.setConfirmpay(confirmpay);
+        } 
 		try {
 			buyinfo.setSeat(seat);
 			buyInfoDao.save(buyinfo);
@@ -149,6 +152,11 @@ public class BuyInfoServiceImpl implements BuyInfoService {
 
 	@Override
 	public UserLoginRes delete(int number) {
+		Optional<BuyInfo> op = buyInfoDao.findByNumber(number);
+		BuyInfo buyinfo = op.get();
+        if (buyinfo.isConfirmpay() == true) {
+            return new UserLoginRes(RtnCode.TICKET_IS_PAID.getCode(),RtnCode.TICKET_IS_PAID.getMessage());
+        } 
 		int res = buyInfoDao.deleteByNumber(number);
 		if(res == 0) {
 			return new UserLoginRes(RtnCode.DELETED_BUY_INFO_NOT_EXSISTED.getCode(), RtnCode.DELETED_BUY_INFO_NOT_EXSISTED.getMessage());
@@ -157,6 +165,22 @@ public class BuyInfoServiceImpl implements BuyInfoService {
 		}
 	}
 
+	@Override
+	public UserLoginRes paycheck(int number) {
+        if (number == 0 ) {
+            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+        }
+		Optional<BuyInfo> op = buyInfoDao.findById(number);
+		BuyInfo buyinfo = op.get();
+        if (buyinfo.isConfirmpay() == true ) {
+            return new UserLoginRes(RtnCode.TICKET_IS_PAID.getCode(),RtnCode.TICKET_IS_PAID.getMessage());
+        }
+        buyinfo.setConfirmpay(true);
+        buyInfoDao.save(buyinfo);
+		return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+	}
+	
+	
 	@Override
 	public UserLoginRes search(String account) {
         if (!StringUtils.hasText(account)) {
