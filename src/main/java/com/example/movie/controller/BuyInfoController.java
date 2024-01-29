@@ -22,7 +22,7 @@ public class BuyInfoController {
 
 	@PostMapping(value = "movie/buyinfo/create")
 	public UserLoginRes create(@RequestBody BuyInfoReq req) {
-		return buyInfoService.create(req.getAccount(),req.getMovie(),req.getMovieId(),req.getCinema(),req.getArea(),req.getPrice(),
+		return buyInfoService.create(req.getMail(),req.getAccount(),req.getMovie(),req.getMovieId(),req.getCinema(),req.getArea(),req.getPrice(),
 				req.getOnDate(),req.getOnTime(),req.getSeat());
 	}
 	

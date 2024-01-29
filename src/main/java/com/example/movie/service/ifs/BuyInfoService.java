@@ -7,7 +7,7 @@ import com.example.movie.vo.UserLoginRes;
 
 public interface BuyInfoService {
 	
-	public UserLoginRes create(String account, String movie,int movieId, String cinema, String area, int price,
+	public UserLoginRes create(String mail,String account, String movie,int movieId, String cinema, String area, int price,
 			LocalDate onDate, String time, String seat);
 
 	public UserLoginRes update(int number, String account, String movie,int movieId, String cinema, String area, int price,
@@ -20,6 +20,9 @@ public interface BuyInfoService {
 	public UserLoginRes searchP(int movieId,String cinema);
 	
 	public UserLoginRes searchseat(int movieId,String cinema,String area,LocalDate onDate,String time);
+	
+	void sendBuyEmail(String userEmail, String account,String movie, String cinema, String area, int price,
+			LocalDate onDate, String time, String seat,String buycode);
 	
 //	public UserLoginRes search(String movie, String cinema, String area, 
 //			LocalDate startDate, LocalDate endDate);

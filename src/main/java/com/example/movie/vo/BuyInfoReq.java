@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BuyInfoReq {
 	
+	private String mail;
+	
 	private int number;
 	
 	private String account;
@@ -108,5 +110,14 @@ public class BuyInfoReq {
 		this.movieId = movieId;
 	}
 
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	
+	
 	
 }
