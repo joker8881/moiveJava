@@ -7,7 +7,7 @@ public interface UserService {
 	
 	public UserLoginRes login(String account,String pwd);
 	
-	public UserLoginGetRes logincheck(String account);
+	public UserLoginRes logincheck(String account);
 	
 	public UserLoginRes create(String account,String pwd,String email,int phone, String name);
 	

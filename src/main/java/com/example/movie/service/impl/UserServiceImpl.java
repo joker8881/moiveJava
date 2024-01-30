@@ -57,17 +57,17 @@ public class UserServiceImpl implements UserService {
     
 
     @Override
-    public UserLoginGetRes logincheck(String account) {
+    public UserLoginRes logincheck(String account) {
         if (!StringUtils.hasText(account)) {
-            return (UserLoginGetRes) new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+            return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
         Optional<User> op = userDao.findById(account);
         if (op.isEmpty()) {
-            return (UserLoginGetRes) new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
         User user = op.get();
         if (!user.isVerify()) {
-            return (UserLoginGetRes) new UserLoginRes(RtnCode.ACCOUNT_NOT_VERIFY.getCode(),RtnCode.ACCOUNT_NOT_VERIFY.getMessage());
+            return new UserLoginRes(RtnCode.ACCOUNT_NOT_VERIFY.getCode(),RtnCode.ACCOUNT_NOT_VERIFY.getMessage());
         }
         if (user.isAdminConfirm()) {
             return new UserLoginGetRes(RtnCode.SUCCESSFUL_ADMIN_LOGIN.getCode(),RtnCode.SUCCESSFUL_ADMIN_LOGIN.getMessage(),op);
@@ -266,7 +266,7 @@ public class UserServiceImpl implements UserService {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("starlightmoviecinema@gmail.com");
             message.setTo(userEmail);
-            message.setSubject("修改驗證碼");
+            message.setSubject("重新驗證帳號");
             String emailContent = "你的帳號為：" + account + "，" + "你的驗證碼為：" + verificationCode;
             message.setText(emailContent);
 
