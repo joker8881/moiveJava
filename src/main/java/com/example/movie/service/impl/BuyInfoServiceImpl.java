@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import com.example.movie.constant.RtnCode;
 import com.example.movie.entity.BuyInfo;
 import com.example.movie.repository.BuyInfoDAO;
+import com.example.movie.repository.UserDAO;
 import com.example.movie.service.ifs.BuyInfoService;
 import com.example.movie.vo.BuyInfoGetRes;
 import com.example.movie.vo.UserLoginRes;
@@ -32,12 +33,15 @@ public class BuyInfoServiceImpl implements BuyInfoService {
     private BuyInfoDAO buyInfoDao;
     
     @Autowired
+    private UserDAO userDao;
+    
+    @Autowired
     public BuyInfoServiceImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
     @Override
-    public UserLoginRes create(String email,String account, String movie,int movieId, String cinema, String area, int price,
+    public UserLoginRes create(String account, String movie,int movieId, String cinema, String area, int price,
 			LocalDate onDate, String time, String seat,boolean confirmpay) {
         if (!StringUtils.hasText(account)) {
             return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
@@ -75,6 +79,8 @@ public class BuyInfoServiceImpl implements BuyInfoService {
             }
         }
         String buyCode = generateVerificationCode();
+        
+        String email = userDao.findUserEmailByAccount(account);
         
         sendBuyEmail(email,account,movie,cinema,area,price,onDate,time,seat,buyCode);
 
@@ -175,10 +181,57 @@ public class BuyInfoServiceImpl implements BuyInfoService {
         if (buyinfo.isConfirmpay() == true ) {
             return new UserLoginRes(RtnCode.TICKET_IS_PAID.getCode(),RtnCode.TICKET_IS_PAID.getMessage());
         }
+        
+        String email = userDao.findUserEmailByAccount(buyinfo.getAccount());
+        
+        sendEmail(email,buyinfo.getAccount(),buyinfo.getMovie(),buyinfo.getCinema(),buyinfo.getArea(),buyinfo.getPrice(),buyinfo.getOnDate(),buyinfo.getOnTime(),buyinfo.getSeat());
+        
         buyinfo.setConfirmpay(true);
         buyInfoDao.save(buyinfo);
 		return new UserLoginRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
+	
+	
+    @Override
+    public void sendEmail(String userEmail,String account, String movie, String cinema, String area, int price,
+			LocalDate onDate, String time, String seat) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("starlightmoviecinema@gmail.com");
+            message.setTo(userEmail);
+            message.setSubject("付費成功通知");
+            
+            // 構建付款頁面URL，將所有訂票相關資訊作為參數添加到URL中
+            String paymentPageUrl = "http://localhost:5173/paypage?" +
+            						"account=" + URLEncoder.encode(account, StandardCharsets.UTF_8) +
+                                    "&movie=" + URLEncoder.encode(movie, StandardCharsets.UTF_8) +
+                                    "&cinema=" + URLEncoder.encode(cinema, StandardCharsets.UTF_8) +
+                                    "&area=" + URLEncoder.encode(area, StandardCharsets.UTF_8) +
+                                    "&price=" + price +
+                                    "&onDate=" + onDate.toString() +
+                                    "&time=" + URLEncoder.encode(time, StandardCharsets.UTF_8) +
+                                    "&seat=" + URLEncoder.encode(seat, StandardCharsets.UTF_8) ;
+
+            // 邮件内容
+            String emailContent = "您的訂票詳情如下：\n" +
+            		"訂購帳號：" + account + "\n" +
+                    "時間：" + onDate.toString() + "，" + time + "\n" +
+                    "電影：" + movie + "\n" +
+                    "影院：" + cinema + "\n" +
+                    "影廳：" + area + "\n" +
+                    "價格：" + price + "元\n" +
+                    "座位：" + seat + "\n\n" +
+                    "付款完畢，祝您觀影愉快！";
+
+            message.setText(emailContent);
+
+            javaMailSender.send(message);
+
+            System.out.println("訂票成功通知郵件已成功發送。");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 	
 	@Override

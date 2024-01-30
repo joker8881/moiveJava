@@ -57,17 +57,17 @@ public class UserServiceImpl implements UserService {
     
 
     @Override
-    public UserLoginRes logincheck(String account) {
+    public UserLoginGetRes logincheck(String account) {
         if (!StringUtils.hasText(account)) {
-            return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+            return (UserLoginGetRes) new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
         Optional<User> op = userDao.findById(account);
         if (op.isEmpty()) {
-            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+            return (UserLoginGetRes) new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
         User user = op.get();
         if (!user.isVerify()) {
-            return new UserLoginRes(RtnCode.ACCOUNT_NOT_VERIFY.getCode(),RtnCode.ACCOUNT_NOT_VERIFY.getMessage());
+            return (UserLoginGetRes) new UserLoginRes(RtnCode.ACCOUNT_NOT_VERIFY.getCode(),RtnCode.ACCOUNT_NOT_VERIFY.getMessage());
         }
         if (user.isAdminConfirm()) {
             return new UserLoginGetRes(RtnCode.SUCCESSFUL_ADMIN_LOGIN.getCode(),RtnCode.SUCCESSFUL_ADMIN_LOGIN.getMessage(),op);

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.movie.entity.BuyInfo;
 import com.example.movie.entity.MovieInfo;
+import com.example.movie.entity.User;
 
 @Repository
 public interface BuyInfoDAO extends JpaRepository<BuyInfo, Integer>{
