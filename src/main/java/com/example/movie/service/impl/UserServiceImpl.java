@@ -57,17 +57,17 @@ public class UserServiceImpl implements UserService {
     
 
     @Override
-    public UserLoginRes logincheck(String account) {
+    public UserLoginGetRes logincheck(String account) {
         if (!StringUtils.hasText(account)) {
-            return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+            return (UserLoginGetRes) new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
         Optional<User> op = userDao.findById(account);
         if (op.isEmpty()) {
-            return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+            return (UserLoginGetRes) new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
         User user = op.get();
         if (!user.isVerify()) {
-            return new UserLoginRes(RtnCode.ACCOUNT_NOT_VERIFY.getCode(),RtnCode.ACCOUNT_NOT_VERIFY.getMessage());
+            return (UserLoginGetRes) new UserLoginRes(RtnCode.ACCOUNT_NOT_VERIFY.getCode(),RtnCode.ACCOUNT_NOT_VERIFY.getMessage());
         }
         if (user.isAdminConfirm()) {
             return new UserLoginGetRes(RtnCode.SUCCESSFUL_ADMIN_LOGIN.getCode(),RtnCode.SUCCESSFUL_ADMIN_LOGIN.getMessage(),op);
@@ -77,12 +77,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserLoginRes create(String account, String pwd, String email,int phone, String name) {
+    public UserLoginRes create(String account, String pwd, String email,String phone, String name) {
     	if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
             return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
         if (userDao.existsById(account)) {
             return new UserLoginRes(RtnCode.ACCOUNT_EXISTED.getCode(),RtnCode.ACCOUNT_EXISTED.getMessage());
+        }
+        if(userDao.existsByEmail(email)) {
+        	return new UserLoginRes(RtnCode.SAME_EMAIL_EXSISTED.getCode(),RtnCode.SAME_EMAIL_EXSISTED.getMessage());
         }
         String encodedPwd = encoder.encode(pwd);
 
@@ -108,7 +111,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public UserLoginRes createAdmi(String account, String pwd, String email,int phone, String name) {
+    public UserLoginRes createAdmi(String account, String pwd, String email,String phone, String name) {
     	if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
             return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
@@ -182,7 +185,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserLoginRes update(String account, String pwd, String email, int phone, String name) {
+	public UserLoginRes update(String account, String pwd, String email, String phone, String name) {
         if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
             return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
@@ -194,6 +197,9 @@ public class UserServiceImpl implements UserService {
         if (!encoder.matches(pwd, user.getPwd())) {
         	return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         } else {
+            if(!user.getEmail().equals(email) && userDao.existsByEmail(email)) {
+            	return new UserLoginRes(RtnCode.SAME_EMAIL_EXSISTED.getCode(),RtnCode.SAME_EMAIL_EXSISTED.getMessage());
+            } 
         	user.setName(name);
         	user.setEmail(email);
         	user.setPhone(phone);
@@ -239,7 +245,7 @@ public class UserServiceImpl implements UserService {
     	if (!StringUtils.hasText(email)) {
             return new UserLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
         }
-    	Optional<User> op = userDao.findAllByEmail(email);
+    	Optional<User> op = userDao.findByEmail(email);
         if (op.isEmpty()) {
             return new UserLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(), RtnCode.ACCOUNT_NOT_FOUND.getMessage());
         }
